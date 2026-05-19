@@ -23,13 +23,39 @@
         <p>Ưu đãi lên đến 40% - Bảo hành chính hãng</p>
     </section>
 
-    <!-- Danh sách sản phẩm -->
-    <main>
-        <h2 class="title">Sản Phẩm Nổi Bật</h2>
-        <div class="product-container" id="product-list">
-            <!-- JS sẽ tự động đổ sản phẩm vào đây -->
-        </div>
-    </main>
+<!-- Danh mục sản phẩm -->
+<section class="category-menu">
+    <button onclick="renderProducts()">Tất cả</button>
+
+    <button onclick="filterProducts('noi-chien')">
+        Nồi Chiên
+    </button>
+
+    <button onclick="filterProducts('may-xay')">
+        Máy Xay
+    </button>
+
+    <button onclick="filterProducts('bep-tu')">
+        Bếp Từ
+    </button>
+
+    <button onclick="filterProducts('noi-com')">
+        Nồi Cơm
+    </button>
+
+    <button onclick="filterProducts('quat')">
+        Quạt
+    </button>
+</section>
+
+<!-- Danh sách sản phẩm -->
+<main>
+    <h2 class="title">Sản Phẩm</h2>
+
+    <div class="product-container" id="product-list">
+        <!-- JS sẽ tự động đổ sản phẩm -->
+    </div>
+</main>
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>

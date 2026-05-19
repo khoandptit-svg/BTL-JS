@@ -25,5 +25,14 @@ const products = [
         image: "images/bep-tu.jpg",
         category: "bep-tu",
         description: "Mặt kính Ceramic chịu nhiệt, phím điều khiển cảm ứng."
-    }
+    },
+    {
+    id: 4,
+    name: "Nồi Chiên Magic A200",
+    price: 2200000,
+    oldPrice: 2900000,
+    image: "LINK_ANH",
+    category: "noi-chien",
+    description: "Dung tích lớn 8L."
+}
 ];
