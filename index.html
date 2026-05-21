@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/banner.css">
     <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/filter.css">
 </head>
 <body>
     <!-- Header/Menu -->
@@ -31,30 +32,15 @@
         <p>Ưu đãi lên đến 40% - Bảo hành chính hãng</p>
     </section>
 
-<!-- Danh mục sản phẩm -->
-<section class="category-menu">
-    <button onclick="renderProducts()">Tất cả</button>
-
-    <button onclick="filterProducts('noi-chien')">
-        Nồi Chiên
-    </button>
-
-    <button onclick="filterProducts('may-xay')">
-        Máy Xay
-    </button>
-
-    <button onclick="filterProducts('bep-tu')">
-        Bếp Từ
-    </button>
-
-    <button onclick="filterProducts('noi-com')">
-        Nồi Cơm
-    </button>
-
-    <button onclick="filterProducts('quat')">
-        Quạt
-    </button>
-</section>
+    <!-- Bộ lọc sản phẩm -->
+<div class="filter-container">
+    <button class="filter-btn active" onclick="filterProducts('all')">Tất cả</button>
+    <button class="filter-btn" onclick="filterProducts('noi-chien')">Nồi Chiên</button>
+    <button class="filter-btn" onclick="filterProducts('may-xay')">Máy Xay</button>
+    <button class="filter-btn" onclick="filterProducts('bep-tu')">Bếp Từ</button>
+    <button class="filter-btn" onclick="filterProducts('noi-com')">Nồi Cơm</button>
+    <button class="filter-btn" onclick="filterProducts('quat')">Quạt</button>
+</div>
 
 <!-- Danh sách sản phẩm -->
 <main>
@@ -64,16 +50,6 @@
         <!-- JS sẽ tự động đổ sản phẩm -->
     </div>
 </main>
-
-<!-- Bộ lọc sản phẩm -->
-<div class="filter-container">
-    <button class="filter-btn active" onclick="filterProducts('all')">Tất cả</button>
-    <button class="filter-btn" onclick="filterProducts('noi-chien')">Nồi Chiên</button>
-    <button class="filter-btn" onclick="filterProducts('may-xay')">Máy Xay</button>
-    <button class="filter-btn" onclick="filterProducts('bep-tu')">Bếp Từ</button>
-    <button class="filter-btn" onclick="filterProducts('noi-com')">Nồi Cơm</button>
-    <button class="filter-btn" onclick="filterProducts('quat')">Quạt</button>
-</div>
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
