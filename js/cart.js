@@ -42,19 +42,19 @@ function renderCart() {
 
 // 2. Hàm thay đổi số lượng sản phẩm
 function changeQuantity(index, delta) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart[index].quantity += delta;
 
-    // Nếu số lượng nhỏ hơn 1 thì xóa luôn sản phẩm
-    if (cart[index].quantity < 1) {
-        cart.splice(index, 1);
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Chỉ cho giảm khi số lượng > 1
+    if (cart[index].quantity + delta >= 1) {
+        cart[index].quantity += delta;
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
+
     renderCart();
     updateCartCount();
 }
-
 
 // 3. Hàm xóa sản phẩm khỏi giỏ
 function removeFromCart(index) {
