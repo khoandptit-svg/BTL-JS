@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả tìm kiếm - KTA Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><img src="images/logoKTA.png" alt="Logo"></a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Tìm sản phẩm khác...">
+                <button id="search-btn">Tìm</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="title" id="search-title">Kết quả tìm kiếm cho: ""</h2>
+        <div class="product-container" id="search-results">
+            </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script>
+        // Logic riêng cho trang search.html
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query')?.toLowerCase();
+            const titleEl = document.getElementById('search-title');
+            const resultsEl = document.getElementById('search-results');
+
+            if (query && titleEl && resultsEl) {
+                titleEl.innerText = `Kết quả tìm kiếm cho: "${query}"`;
+
+                // Lọc sản phẩm từ file data.js
+                const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+
+                if (filtered.length > 0) {
+                    filtered.forEach(product => {
+                        resultsEl.innerHTML += `
+                            <div class="product-card">
+                                <img src="${product.image}" alt="${product.name}">
+                                <h3>${product.name}</h3>
+                                <p class="price">${product.price.toLocaleString('vi-VN')} đ</p>
+                                <button onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+                            </div>`;
+                    });
+                } else {
+                    resultsEl.innerHTML = `<p style="grid-column: 1/-1; text-align:center;">Rất tiếc, không tìm thấy sản phẩm nào.</p>`;
+                }
+            }
+        };
+    </script>
+
+
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>KTA SHOP</h3>
+            <p>Chuyên cung cấp đồ gia dụng thông minh, chính hãng Magic Eco. Mang lại sự tiện nghi cho căn bếp nhà bạn.</p>
+            <div class="social-links">
+                <a href="#">🌐 Website</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Thông Tin Liên Hệ</h4>
+            <p>📍 Địa chỉ: Hà Nội, Việt Nam</p>
+            <p>📞 Hotline: 098.XXX.XXXX</p>
+            <p>✉️ Email: support@ktashop.vn</p>
+            <p>⏰ Giờ làm việc: 8:00 - 21:00</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 KTA Shop. Tất cả các quyền được bảo lưu.</p>
+    </div>
+</footer>
+
+     <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+
+</body>
+</html>

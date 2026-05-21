@@ -72,3 +72,25 @@ function filterProducts(category) {
         renderProducts(filtered);
     }
 }
+
+//5. Chức năng tìm kiếm sản phẩm
+function handleSearch() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+
+    const keyword = searchInput.value.trim();
+    if (keyword !== "") {
+        // Chuyển hướng sang trang search.html kèm theo từ khóa trên URL
+        window.location.href = `search.html?query=${encodeURIComponent(keyword)}`;
+    }
+}
+
+// Gán sự kiện cho nút tìm kiếm
+document.getElementById('search-btn')?.addEventListener('click', handleSearch);
+
+// Nhấn Enter cũng tìm kiếm
+document.getElementById('search-input')?.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
+});

@@ -12,24 +12,30 @@
     padding: 0 5% 40px; 
 }
 
+/* Khung sản phẩm */
 .product-card { 
     background: #fff;
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
+    border: 1px solid #eee; 
+    border-radius: 12px; /* Bo tròn góc nhiều hơn cho hiện đại */
     padding: 15px; 
     text-align: center; 
-    transition: transform 0.3s, box-shadow 0.3s; 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Hiệu ứng mượt mà hơn */
+    position: relative;
+    overflow: hidden;
 }
 
+/* 1. Hiệu ứng khi di chuột vào toàn bộ thẻ (Hover Card) */
 .product-card:hover { 
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    transform: translateY(-8px); /* Nhấc thẻ lên cao hơn một chút */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Đổ bóng sâu và mềm hơn */
+    border-color: #38a149; /* Đổi màu viền sang xanh KTA */
 }
 
 .product-card img { 
     max-width: 100%; 
     height: 200px; 
     object-fit: contain; 
+    transition: transform 0.5s ease; /* Thời gian phóng to ảnh */
 }
 
 .product-card h3 { 
@@ -52,18 +58,21 @@
     margin-left: 10px; 
 }
 
-.product-card button { 
-    background: #38a149; 
-    color: white; 
-    border: none; 
-    padding: 10px 15px; 
-    margin-top: 15px; 
-    cursor: pointer; 
-    border-radius: 4px; 
-    width: 100%; 
+/* 3. Hiệu ứng cho nút bấm (Button Hover) */
+.product-card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #38a149;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
 }
 
-.product-card button:hover { 
-    background: #2d823b; 
+.product-card button:hover {
+    background-color: #c61d23; /* Đổi từ xanh sang đỏ khi di chuột vào nút */
+    transform: scale(1.05); /* Nút to lên một chút */
 }
