@@ -1,0 +1,18 @@
+.banner { 
+    background: #f1f1f1; 
+    text-align: center; 
+    padding: 60px 20px; 
+    border-bottom: 2px solid #eee;
+    background-image: linear-gradient(to right, #ece9e6, #ffffff);
+}
+
+.banner h2 {
+    font-size: 28px;
+    color: #c61d23; /* Màu đỏ làm điểm nhấn */
+    margin-bottom: 10px;
+}
+
+.banner p {
+    font-size: 18px;
+    color: #555;
+}
