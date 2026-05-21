@@ -19,7 +19,7 @@ const products = [
     },
     {
         id: 3,
-        name: "Bếp Từ Đơn Cao Cấp Magic",
+        name: "Bếp Từ Magic Eco AC-201",
         price: 1250000,
         oldPrice: 1600000,
         image: "https://magic.com.vn/wp-content/uploads/2022/08/bep-dien-tu-MAGIC-Eco-AC-202_MAGIC-Vietnam_0822-2.png",
@@ -28,11 +28,20 @@ const products = [
     },
     {
         id: 4,
-        name: "Nồi Chiên Không Dầu Magic A-801 Màu Đỏ",
-        price: 2200000,
-        oldPrice: 2900000,
-        image: "https://magic.com.vn/wp-content/uploads/2022/05/a802-do%CC%89-370x370.jpg",
-        category: "noi-chien",
-        description: "Dung tích lớn 8L."
-}
+        name: "Nồi Cơm Điện Tử Magic Eco AC-250",
+        price: 990000,
+        oldPrice: 1990000,
+        image: "https://magic.com.vn/wp-content/uploads/2024/03/9-6.jpg",
+        category: "noi-com",
+        description: "Công nghệ cao tần IH giúp cơm chín đều, thơm ngon."
+    },
+    {
+        id: 5,
+        name: "Quạt Đứng Magic A-254",
+        price: 1350000,
+        oldPrice: 1590000,
+        image: "https://magic.com.vn/wp-content/uploads/2026/02/Ban-sao-cua-Bai-post-cua-Showroom-2.jpg",
+        category: "quat",
+        description: "Nhiều chế độ gió, tiết kiệm điện năng."
+    }
 ];
