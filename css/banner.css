@@ -1,18 +1,26 @@
 .banner { 
-    background: #f1f1f1; 
+    /* Đổi nền thành màu đỏ (Sử dụng mã màu đỏ của KTA Shop hoặc đỏ đậm chuyên nghiệp) */
+    background: #c61d23; 
+    
     text-align: center; 
     padding: 60px 20px; 
-    border-bottom: 2px solid #eee;
-    background-image: linear-gradient(to right, #ece9e6, #ffffff);
+    border-bottom: 2px solid #a5181d; /* Đổi màu viền dưới cho đậm hơn màu nền */
+    
+    /* Tạo hiệu ứng gradient nhẹ để màu đỏ nhìn sang trọng hơn, không bị chói */
+    background-image: linear-gradient(to right, #e71d23, #b3191f);
+    
+    color: #ffffff; /* Đảm bảo các thành phần bên trong nhận màu trắng */
 }
 
 .banner h2 {
-    font-size: 28px;
-    color: #c61d23; /* Màu đỏ làm điểm nhấn */
+    font-size: 32px;
+    color: #ffffff; /* Chữ tiêu đề màu trắng */
     margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Thêm bóng đổ nhẹ cho chữ nổi bật */
 }
 
 .banner p {
     font-size: 18px;
-    color: #555;
+    color: #ffffff; /* Chữ mô tả màu trắng */
+    opacity: 0.9; /* Làm chữ mô tả hơi mờ nhẹ để phân biệt với tiêu đề */
 }
