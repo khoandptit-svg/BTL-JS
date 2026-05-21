@@ -22,17 +22,17 @@ const products = [
         name: "Bếp Từ Đơn Cao Cấp Magic",
         price: 1250000,
         oldPrice: 1600000,
-        image: "images/bep-tu.jpg",
+        image: "https://magic.com.vn/wp-content/uploads/2022/08/bep-dien-tu-MAGIC-Eco-AC-202_MAGIC-Vietnam_0822-2.png",
         category: "bep-tu",
         description: "Mặt kính Ceramic chịu nhiệt, phím điều khiển cảm ứng."
     },
     {
-    id: 4,
-    name: "Nồi Chiên Magic A200",
-    price: 2200000,
-    oldPrice: 2900000,
-    image: "LINK_ANH",
-    category: "noi-chien",
-    description: "Dung tích lớn 8L."
+        id: 4,
+        name: "Nồi Chiên Không Dầu Magic A-801 Màu Đỏ",
+        price: 2200000,
+        oldPrice: 2900000,
+        image: "https://magic.com.vn/wp-content/uploads/2022/05/a802-do%CC%89-370x370.jpg",
+        category: "noi-chien",
+        description: "Dung tích lớn 8L."
 }
 ];
