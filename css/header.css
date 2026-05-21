@@ -1,18 +1,19 @@
 header {
     background: #38a149; /* Màu xanh lá KTA */
-    padding: 10px 5%;
+    padding: 10px 0; /* Thu hẹp padding dọc */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
 .header-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Đẩy Logo sang trái, Nav sang phải, Search ở giữa */
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1200px; /* Độ rộng tối đa để cân bằng với nội dung giỏ hàng */
+    margin: 0 auto;    /* Căn giữa Header */
+    padding: 0 5%;
     gap: 20px;
 }
-
 /* Kiểu dáng thanh tìm kiếm */
 .search-container {
     flex: 1; /* Để thanh tìm kiếm chiếm không gian ở giữa */
@@ -43,11 +44,22 @@ header {
     background: #a5181d;
 }
 
-.logo img { height: 50px; }
+/* Đảm bảo Logo không quá to làm lệch Header */
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+/* Căn chỉnh Nav */
+header nav {
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Ngăn chữ bị nhảy dòng */
+}
 
 header nav a {
     color: white;
-    margin-left: 15px;
+    margin-left: 20px;
     font-weight: bold;
-    font-size: 14px;
+    text-decoration: none;
 }

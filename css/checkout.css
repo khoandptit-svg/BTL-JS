@@ -109,3 +109,65 @@
     font-weight: 500;
     font-size: 14px;
 }
+
+/* Cấu trúc Header */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 5%;
+}
+
+/* Phần bên trái - Giữ Logo sát lề trái */
+.header-left {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Phần chính giữa - Chữ KTA đỏ */
+.header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.brand-name {
+    color: #ff0000;
+    font-size: 35px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: 5px;
+    text-shadow: 1px 1px 0px #fff;
+}
+
+/* Phần bên phải - Đẩy Menu sát lề phải */
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Đẩy nội dung về bên phải */
+}
+
+.checkout-nav {
+    display: flex;
+    gap: 25px; /* Khoảng cách giữa Trang chủ và Giỏ hàng */
+}
+
+.checkout-nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.checkout-nav a:hover {
+    color: #ffeb3b; /* Hiệu ứng đổi màu khi di chuột */
+}
+
+/* Chỉnh Logo gọn gàng */
+.logo img {
+    height: 50px;
+    width: auto;
+}
