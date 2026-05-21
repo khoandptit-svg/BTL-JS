@@ -51,3 +51,28 @@ function handleLogin() {
         alert("Sai tên đăng nhập hoặc mật khẩu!");
     }
 }
+
+// Hàm kiểm tra trạng thái đăng nhập và cập nhật giao diện Header
+function checkLoginStatus() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const authLink = document.querySelector('.checkout-nav a[href="login.html"]');
+
+    if (currentUser && authLink) {
+        // Nếu đã đăng nhập: Thay chữ "Đăng nhập" bằng tên user và nút Đăng xuất
+        authLink.parentElement.innerHTML = `
+            <span style="color: #ffeb3b; font-weight: bold;">Chào, ${currentUser.username}</span>
+            <a href="#" onclick="handleLogout()" style="margin-left: 15px;">Đăng xuất</a>
+            <a href="cart.html">Giỏ hàng</a>
+        `;
+    }
+}
+
+// Hàm xử lý đăng xuất
+function handleLogout() {
+    localStorage.removeItem('currentUser');
+    alert("Bạn đã đăng xuất!");
+    window.location.reload(); // Tải lại trang để cập nhật giao diện
+}
+
+// Chạy hàm kiểm tra ngay khi trang web tải xong
+document.addEventListener('DOMContentLoaded', checkLoginStatus);
