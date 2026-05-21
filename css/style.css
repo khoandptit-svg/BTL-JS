@@ -123,3 +123,25 @@ header nav a { color: white; margin-left: 20px; text-decoration: none; font-weig
 .checkout-btn:hover {
     background: #45a049;
 }
+
+/* Căn chỉnh lại Logo */
+.logo img {
+    height: 50px; /* Bạn có thể tăng giảm số này để logo to hoặc nhỏ hơn */
+    width: auto;  /* Giữ đúng tỷ lệ ảnh */
+    display: block;
+}
+
+/* Căn giữa các thành phần trong header theo chiều dọc */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Giúp menu và logo thẳng hàng nhau */
+    padding: 10px 5%; /* Giảm bớt padding để header gọn hơn */
+    background: #c61d23;
+    color: white;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}s
