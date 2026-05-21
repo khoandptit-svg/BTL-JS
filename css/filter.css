@@ -1,0 +1,28 @@
+/* Layout bộ lọc */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 0 5%;
+}
+
+/* Kiểu dáng nút bấm */
+.filter-btn {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng khi di chuột và khi nút đang được chọn */
+.filter-btn:hover, 
+.filter-btn.active {
+    background-color: #38a149; /* Màu xanh KTA */
+    color: white;
+    border-color: #38a149;
+}
