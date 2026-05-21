@@ -43,5 +43,33 @@ const products = [
         image: "https://magic.com.vn/wp-content/uploads/2026/02/Ban-sao-cua-Bai-post-cua-Showroom-2.jpg",
         category: "quat",
         description: "Nhiều chế độ gió, tiết kiệm điện năng."
+    },
+    {
+        id: 6,
+        name: "Bếp Đôi Hồng Ngoại Và Điện Tử Magic Eco AC-220",
+        price: 10900000,  
+        oldPrice: 16990000,
+        image: "https://magic.com.vn/wp-content/uploads/2021/04/Bep-Doi-Hong-Ngoai-Va-Dien-Tu-Magic-Eco-AC-220_MAGIC-Vietnam_0922-2-1.jpg",
+        category: "bep-tu",
+        description: "Công suất mạnh mẽ,tiện lợi."
+    },
+    {
+        id: 7,
+        name: "Nồi Chiên Nướng Không Dầu MAGIC Eco AC-102 ",
+        price: 2690000,
+        oldPrice: 3590000,
+        image: "https://magic.com.vn/wp-content/uploads/2021/04/Noi-chien-khong-dau-MAGIC-Eco-AC-102_MAGIC-Vietnam_0922-1.png",
+        category: "noi-chien",
+        description: "Dung tích cực lớn 5.5 Lít. Giảm 90% lượng dầu mỡ"
+    },
+    {
+        id: 8,
+        name: "Nồi Cơm Điện Tử MAGIC Eco AC-260",
+        price: 1690000,
+        oldPrice: 1990000,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR15fJn9_Kz-vKCWUQe9Ko1bNpiSxP1qD2z0Q&s",
+        category: "noi-com",
+        description: "Công nghệ cao tần IH giúp cơm chín đều, thơm ngon."
     }
+
 ];
