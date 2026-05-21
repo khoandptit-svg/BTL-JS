@@ -32,3 +32,19 @@
     cursor: pointer; 
     font-weight: bold;
 }
+
+/* Thêm vào cart.css */
+.cart-container {
+    overflow: hidden; /* Giúp bao phủ các phần tử float bên trong */
+    margin-bottom: 50px; /* Tạo khoảng cách an toàn với Footer */
+}
+
+.cart-summary { 
+    margin-top: 30px;
+    float: right; 
+    width: 350px; /* Tăng chiều rộng một chút để không bị chật */
+    padding: 20px; 
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Đổ bóng cho đẹp như ảnh bạn muốn */
+}
