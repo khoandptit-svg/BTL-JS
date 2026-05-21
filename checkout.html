@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/checkout.css">
      <link rel="stylesheet" href="css/footer.css">
-     <link rel="stylesheet" href="css/product.css">
+     
    
     
 </head>
@@ -54,32 +54,42 @@
     <script>
         // Hiển thị tóm tắt sản phẩm trong giỏ hàng
         window.onload = function() {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const reviewList = document.getElementById('review-list');
-            const totalEl = document.getElementById('checkout-total');
-            let total = 0;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const reviewList = document.getElementById('review-list');
+    const totalEl = document.getElementById('checkout-total');
+    let total = 0;
 
-            if(cart.length === 0) {
-                alert("Giỏ hàng trống!");
-                window.location.href = "index.html";
-                return;
-            }
+    if(cart.length === 0) {
+        alert("Giỏ hàng trống!");
+        window.location.href = "index.html";
+        return;
+    }
 
-            cart.forEach(item => {
-                const p = products.find(product => product.id === item.id);
-                if(p) {
-                    const subtotal = p.price * item.quantity;
-                    total += subtotal;
-                    reviewList.innerHTML += `
-                        <div class="review-item">
-                            <span>${p.name} (x${item.quantity})</span>
-                            <span>${subtotal.toLocaleString('vi-VN')} đ</span>
+    reviewList.innerHTML = ""; // Làm sạch danh sách trước khi lặp
+
+    cart.forEach(item => {
+        const p = products.find(product => product.id === item.id);
+        if(p) {
+            const subtotal = p.price * item.quantity;
+            total += subtotal;
+            
+            // Cấu trúc mới có thêm thẻ img
+            reviewList.innerHTML += `
+                <div class="review-item">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div class="review-info">
+                        <div class="review-name">
+                            ${p.name} <br>
+                            <small>SL: ${item.quantity}</small>
                         </div>
-                    `;
-                }
-            });
-            totalEl.innerText = total.toLocaleString('vi-VN') + " đ";
-        };
+                        <span>${subtotal.toLocaleString('vi-VN')} đ</span>
+                    </div>
+                </div>
+            `;
+        }
+    });
+    totalEl.innerText = total.toLocaleString('vi-VN') + " đ";
+};
 
         // Hàm xác nhận đặt hàng
         function confirmOrder() {

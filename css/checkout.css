@@ -82,3 +82,30 @@
 .btn-confirm:hover { 
     background: #2d813a; 
 }
+
+/* Ảnh sản phẩm trong bản tóm tắt */
+.review-item {
+    display: flex;
+    align-items: center; /* Căn giữa ảnh và chữ theo chiều dọc */
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.review-item img {
+    width: 60px; /* Độ rộng ảnh nhỏ gọn */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.review-info {
+    flex: 1; /* Để phần thông tin chiếm hết chỗ còn lại */
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-name {
+    font-weight: 500;
+    font-size: 14px;
+}
