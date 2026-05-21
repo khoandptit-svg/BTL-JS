@@ -63,6 +63,7 @@ function removeFromCart(index) {
     updateCartCount();
 }
 
+<<<<<<< HEAD
 // 7. Hàm thanh toán đơn giản
 function checkout() {
     alert("Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ liên hệ sớm.");
@@ -71,6 +72,51 @@ function checkout() {
 }
 
 // Cập nhật lại window.onload để chạy cả renderCart
+=======
+// 4. Hàm lọc sản phẩm theo mặt hàng
+function filterProducts(category) {
+
+    const productList = document.getElementById('product-list');
+
+    if (!productList) return;
+
+    // Xóa sản phẩm cũ
+    productList.innerHTML = "";
+
+    // Lọc sản phẩm theo category
+    const filteredProducts = products.filter(product => 
+        product.category === category
+    );
+
+    // Hiển thị sản phẩm sau khi lọc
+    filteredProducts.forEach(product => {
+
+        productList.innerHTML += `
+            <div class="product-card">
+
+                <img src="${product.image}" alt="${product.name}">
+
+                <h3>${product.name}</h3>
+
+                <p class="price">
+                    ${product.price.toLocaleString('vi-VN')} đ
+
+                    <span class="old-price">
+                        ${product.oldPrice.toLocaleString('vi-VN')} đ
+                    </span>
+                </p>
+
+                <button onclick="addToCart(${product.id})">
+                    Thêm vào giỏ
+                </button>
+
+            </div>
+        `;
+    });
+}
+
+// Chạy các hàm khi trang web tải xong
+>>>>>>> a61a7b55d67202c21b00110bfcd5b94fae8eb4d9
 window.onload = function() {
     renderProducts();
     renderCart(); // Thêm dòng này
