@@ -19,6 +19,7 @@ a {
 ul {
     list-style: none;
 }
+
 /* =========================
    RESPONSIVE MOBILE/TABLET
 ========================= */
@@ -96,14 +97,15 @@ ul {
         padding: 8px;
         text-align: center;
     }
-        .cart-table{
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    }
+
     .cart-table img{
         width: 60px;
-    }    
+    }
+    .cart-table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
     /* Cart summary */
     .cart-summary{
         margin-top: 20px;
