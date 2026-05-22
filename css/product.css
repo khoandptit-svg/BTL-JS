@@ -207,3 +207,17 @@
     .modal-img-wrap { width: 100%; min-width: unset; padding: 20px; }
     .modal-info { padding: 16px 20px 20px; }
 }
+
+/* hiện giảm giá góc trái trên sản phẩm nếu có giá cũ và giá mới */
+.discount-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #c61d23;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 1;
+}

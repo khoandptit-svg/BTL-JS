@@ -6,6 +6,7 @@ function renderProducts(data = products) {
     data.forEach(product => {
         productList.innerHTML += `
             <div class="product-card">
+                ${product.oldPrice ? `<span class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</span>` : ''}
                 <img src="${product.image}" alt="${product.name}" onclick="openProductModal(${product.id})" style="cursor:pointer;">
                 <h3>${product.name}</h3>
                 <p class="price">
@@ -13,7 +14,8 @@ function renderProducts(data = products) {
                     ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString('vi-VN')} đ</span>` : ''}
                 </p>
                 <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
-            </div>`;
+            </div>
+        `;
     });
 }
 
