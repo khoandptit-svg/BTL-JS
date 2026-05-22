@@ -6,16 +6,14 @@ function renderProducts(data = products) {
     productList.innerHTML = ""; 
     
     data.forEach(product => {
-        // Tạo chuỗi HTML cho mỗi thẻ sản phẩm
-        // Thay đổi onclick thành thẻ <a> trỏ đến trang chi tiết kèm ID
         productList.innerHTML += `
             <div class="product-card">
-                <a href="product-detail.html?id=${product.id}" style="text-decoration: none; color: inherit;">
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                </a>
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
                 <p class="price">${product.price.toLocaleString('vi-VN')} đ</p>
-                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                    Thêm vào giỏ
+                </button>
             </div>`;
     });
 }
