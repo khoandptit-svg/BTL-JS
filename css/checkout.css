@@ -4,9 +4,9 @@
     padding: 40px 5%; 
     max-width: 1200px; 
     margin: 0 auto; 
-    display: flex; 
+    display: flex; /* Chia layout thành 2 cột: Form và Tóm tắt đơn hàng */
     gap: 30px; 
-    flex-wrap: wrap; 
+    flex-wrap: wrap; /* Tự động xuống hàng nếu màn hình quá hẹp (Mobile) */
 }
 
 .checkout-form { 
@@ -18,12 +18,12 @@
 }
 
 .order-review { 
-    flex: 1; 
+    flex: 1; /* Cột tóm tắt chiếm tỷ lệ ít hơn (1 phần) */
     background: #f9f9f9; 
     padding: 25px; 
     border-radius: 8px; 
     border: 1px solid #eee; 
-    height: fit-content; 
+    height: fit-content; /* Chiều cao tự co theo nội dung, không kéo dài thừa */
 }
 
 .form-group { 

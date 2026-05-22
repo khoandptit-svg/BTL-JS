@@ -2,7 +2,7 @@
 
 .cart-table { 
     width: 100%; 
-    border-collapse: collapse; 
+    border-collapse: collapse; /* Gộp các đường viền bảng lại thành 1 đường mảnh */
     background: #fff;
 }
 
@@ -47,4 +47,19 @@
     background: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Đổ bóng cho đẹp như ảnh bạn muốn */
+}
+
+/* Phần chính giữa - Chữ KTA đỏ */
+.header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.brand-name {
+    color: #ff0000;
+    font-size: 35px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: 5px;
+    text-shadow: 1px 1px 0px #fff;
 }

@@ -6,7 +6,8 @@
 }
 
 .product-container { 
-    display: grid; 
+    display: grid; /* Sử dụng hệ thống lưới để quản lý sản phẩm */
+    /* Tự động tính số cột: tối thiểu mỗi cột 250px, tối đa chiếm hết chỗ trống */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     gap: 25px; 
     padding: 0 5% 40px; 
@@ -20,8 +21,8 @@
     padding: 15px; 
     text-align: center; 
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Hiệu ứng mượt mà hơn */
-    position: relative;
-    overflow: hidden;
+    position: relative; /* Làm gốc tọa độ cho các phần tử tuyệt đối bên trong */
+    overflow: hidden;/* Cắt bỏ các phần thừa nếu ảnh hoặc nút tràn ra ngoài */
 }
 
 /* 1. Hiệu ứng khi di chuột vào toàn bộ thẻ (Hover Card) */
