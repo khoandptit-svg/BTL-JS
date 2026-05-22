@@ -1,20 +1,46 @@
 // 1. Hàm hiển thị danh sách sản phẩm ra trang chủ
+// 1. Hàm hiển thị lại sản phẩm (có thêm onclick)
 function renderProducts() {
     const productList = document.getElementById('product-list');
-    if (!productList) return; // Nếu không phải trang chủ thì dừng
-
-    productList.innerHTML = ""; // Xóa dữ liệu cũ
-    
+    if (!productList) return;
+    productList.innerHTML = ""; 
     products.forEach(product => {
         productList.innerHTML += `
             <div class="product-card">
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p class="price">${product.price.toLocaleString('vi-VN')} đ <span class="old-price">${product.oldPrice.toLocaleString('vi-VN')} đ</span></p>
+                <img src="${product.image}" onclick="openProductModal(${product.id})" style="cursor:pointer">
+                <h3 onclick="openProductModal(${product.id})" style="cursor:pointer">${product.name}</h3>
+                <p class="price">${product.price.toLocaleString('vi-VN')} đ</p>
                 <button onclick="addToCart(${product.id})">Thêm vào giỏ</button>
-            </div>
-        `;
+            </div>`;
     });
+}
+
+// 2. Hàm mở bảng nhỏ
+function openProductModal(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+    
+    let modal = document.getElementById('product-modal');
+    if(!modal) return;
+
+    document.getElementById('modal-img').src = product.image;
+    document.getElementById('modal-name').innerText = product.name;
+    document.getElementById('modal-price').innerText = product.price.toLocaleString('vi-VN') + " đ";
+    document.getElementById('modal-desc').innerText = product.description || "Chưa có mô tả";
+    
+    // Gán sự kiện cho nút thêm vào giỏ ngay trong modal
+    // Thêm dòng này để điều khiển nút trong bảng nhỏ
+    const addBtn = document.getElementById('modal-add-btn');
+    addBtn.onclick = function() {
+        addToCart(product.id);
+    };
+
+    modal.style.display = "block";
+}
+
+// 3. Hàm đóng bảng
+function closeModal() {
+    document.getElementById('product-modal').style.display = "none";
 }
 
 // 2. Hàm xử lý thêm vào giỏ hàng (Đã cập nhật kiểm tra đăng nhập)
@@ -135,3 +161,6 @@ document.getElementById('search-input')?.addEventListener('keypress', function (
         handleSearch();
     }
 });
+
+
+
