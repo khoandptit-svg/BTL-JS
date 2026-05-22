@@ -1,19 +1,15 @@
-// 1. Hàm hiển thị danh sách sản phẩm ra trang chủ
-// 1. Hàm hiển thị lại sản phẩm (có thêm onclick)
 function renderProducts(data = products) { 
     const productList = document.getElementById('product-list');
     if (!productList) return;
     productList.innerHTML = ""; 
-    
+
     data.forEach(product => {
         productList.innerHTML += `
             <div class="product-card">
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p class="price">${product.price.toLocaleString('vi-VN')} đ</p>
-                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
-                    Thêm vào giỏ
-                </button>
+                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
             </div>`;
     });
 }
@@ -23,7 +19,7 @@ function renderProducts(data = products) {
 function updateCartCount() {
     // Luôn luôn tìm thẻ cart-count mới nhất trên giao diện
     const cartCountEl = document.getElementById('cart-count');
-    
+
     if (cartCountEl) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         // Tính tổng số lượng
@@ -47,15 +43,15 @@ function addToCart(id) {
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let itemExisted = cart.find(item => item.id === id);
-    
+
     if (itemExisted) {
         itemExisted.quantity += 1;
     } else {
         cart.push({ id: id, quantity: 1 });
     }
-    
+
     localStorage.setItem('cart', JSON.stringify(cart));
-    
+
     // GỌI CẬP NHẬT NGAY TẠI ĐÂY
     updateCartCount();
     alert("Đã thêm vào giỏ hàng!");
@@ -104,6 +100,3 @@ document.getElementById('search-input')?.addEventListener('keypress', function (
 // Gọi hàm để hiện sản phẩm ngay khi load trang
 renderProducts(); 
 updateCartCount();
-
-
-
