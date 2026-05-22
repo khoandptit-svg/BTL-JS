@@ -75,15 +75,22 @@
 <div id="product-modal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
+        
         <div class="modal-body">
             <div class="modal-left">
-                <img id="modal-img" src="" alt="" style="width:100%">
+                <img id="modal-img" src="" alt="Sản phẩm">
             </div>
+
             <div class="modal-right">
                 <h2 id="modal-name"></h2>
-                <p id="modal-price" style="color:red; font-weight:bold; font-size:20px"></p>
-                <p id="modal-desc" style="margin-top:10px"></p>
-                <button id="modal-add-btn" style="margin-top:20px; padding:10px 20px; background:#38a149; color:white; border:none; cursor:pointer">Thêm vào giỏ</button>
+                <p id="modal-price" class="modal-price-style"></p>
+                <p id="modal-desc"></p>
+                
+                <div class="modal-action">
+                    <button id="modal-add-btn" class="btn-add-modal">
+                        Thêm vào giỏ hàng
+                    </button>
+                </div>
             </div>
         </div>
     </div>

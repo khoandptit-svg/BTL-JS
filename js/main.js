@@ -1,10 +1,13 @@
 // 1. Hàm hiển thị danh sách sản phẩm ra trang chủ
 // 1. Hàm hiển thị lại sản phẩm (có thêm onclick)
-function renderProducts() {
+// Thêm tham số data để nhận danh sách sản phẩm (Tất cả hoặc Đã lọc)
+// 1. Hàm hiển thị sản phẩm (Sửa để nhận tham số data)
+function renderProducts(data = products) { 
     const productList = document.getElementById('product-list');
     if (!productList) return;
     productList.innerHTML = ""; 
-    products.forEach(product => {
+    
+    data.forEach(product => {
         productList.innerHTML += `
             <div class="product-card">
                 <img src="${product.image}" onclick="openProductModal(${product.id})" style="cursor:pointer">
@@ -15,7 +18,7 @@ function renderProducts() {
     });
 }
 
-// 2. Hàm mở bảng nhỏ
+// 2. Hàm mở bảng nhỏ (Đã thêm lệnh hiển thị block)
 function openProductModal(id) {
     const product = products.find(p => p.id === id);
     if (!product) return;
@@ -23,61 +26,22 @@ function openProductModal(id) {
     let modal = document.getElementById('product-modal');
     if(!modal) return;
 
+    // Đổ dữ liệu
     document.getElementById('modal-img').src = product.image;
     document.getElementById('modal-name').innerText = product.name;
     document.getElementById('modal-price').innerText = product.price.toLocaleString('vi-VN') + " đ";
-    document.getElementById('modal-desc').innerText = product.description || "Chưa có mô tả";
+    document.getElementById('modal-desc').innerText = product.description || "Chưa có mô tả.";
     
-    // Gán sự kiện cho nút thêm vào giỏ ngay trong modal
-    // Thêm dòng này để điều khiển nút trong bảng nhỏ
-    const addBtn = document.getElementById('modal-add-btn');
-    addBtn.onclick = function() {
-        addToCart(product.id);
-    };
-
+    // HIỂN THỊ BẢNG (Dòng này cực kỳ quan trọng)
     modal.style.display = "block";
 }
 
+
 // 3. Hàm đóng bảng
 function closeModal() {
-    document.getElementById('product-modal').style.display = "none";
+    document.getElementById("product-modal").style.display = "none";
 }
 
-// 2. Hàm xử lý thêm vào giỏ hàng (Đã cập nhật kiểm tra đăng nhập)
-function addToCart(id) {
-    // BƯỚC 1: KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP
-    const currentUser = localStorage.getItem('currentUser');
-    
-    if (!currentUser) {
-        // Nếu chưa đăng nhập, thông báo và đẩy sang trang login
-        alert("Vui lòng đăng nhập để có thể mua hàng!");
-        window.location.href = "login.html";
-        return; // Thoát hàm ngay lập tức, không chạy code phía dưới
-    }
-
-    // BƯỚC 2: XỬ LÝ THÊM HÀNG (Nếu đã đăng nhập)
-    // Lấy giỏ hàng từ LocalStorage hoặc tạo mới nếu chưa có
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Kiểm tra sản phẩm đã tồn tại trong giỏ hàng chưa
-    let itemExisted = cart.find(item => item.id === id);
-    
-    if (itemExisted) {
-        // Nếu có rồi thì tăng thêm 1
-        itemExisted.quantity += 1;
-    } else {
-        // Nếu chưa có thì thêm mới với số lượng là 1
-        cart.push({ id: id, quantity: 1 });
-    }
-    
-    // Gọi hàm cập nhật số lượng hiển thị trên icon giỏ hàng ở header
-    updateCartCount();
-
-    // BƯỚC 3: LƯU LẠI VÀ CẬP NHẬT GIAO DIỆN
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert("Sản phẩm đã được thêm vào giỏ hàng thành công!");
-    
-}
 
 
 // 3. Cập nhật số lượng hiển thị trên icon giỏ hàng ở Menu
@@ -161,6 +125,11 @@ document.getElementById('search-input')?.addEventListener('keypress', function (
         handleSearch();
     }
 });
+
+// THÊM 2 DÒNG NÀY ĐỂ CHẠY CHƯƠNG TRÌNH
+// Gọi hàm để hiện sản phẩm ngay khi load trang
+renderProducts(); 
+updateCartCount();
 
 
 
