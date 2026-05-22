@@ -17,44 +17,85 @@ function renderProducts() {
     });
 }
 
-
-// 2. Hàm xử lý thêm vào giỏ hàng (Dùng LocalStorage)
+// 2. Hàm xử lý thêm vào giỏ hàng (Đã cập nhật kiểm tra đăng nhập)
 function addToCart(id) {
-    // Lấy giỏ hàng hiện tại từ LocalStorage, nếu chưa có thì tạo mảng rỗng
+    // BƯỚC 1: KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (!currentUser) {
+        // Nếu chưa đăng nhập, thông báo và đẩy sang trang login
+        alert("Vui lòng đăng nhập để có thể mua hàng!");
+        window.location.href = "login.html";
+        return; // Thoát hàm ngay lập tức, không chạy code phía dưới
+    }
+
+    // BƯỚC 2: XỬ LÝ THÊM HÀNG (Nếu đã đăng nhập)
+    // Lấy giỏ hàng từ LocalStorage hoặc tạo mới nếu chưa có
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
-    // Kiểm tra sản phẩm đã có trong giỏ chưa
+    // Kiểm tra sản phẩm đã tồn tại trong giỏ hàng chưa
     let itemExisted = cart.find(item => item.id === id);
     
     if (itemExisted) {
-        itemExisted.quantity += 1; // Có rồi thì tăng số lượng
+        // Nếu có rồi thì tăng thêm 1
+        itemExisted.quantity += 1;
     } else {
-        cart.push({ id: id, quantity: 1 }); // Chưa có thì thêm mới vào mảng
+        // Nếu chưa có thì thêm mới với số lượng là 1
+        cart.push({ id: id, quantity: 1 });
     }
     
-    // Lưu lại vào LocalStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
-    alert("Đã thêm sản phẩm vào giỏ hàng!");
+    // Gọi hàm cập nhật số lượng hiển thị trên icon giỏ hàng ở header
     updateCartCount();
+
+    // BƯỚC 3: LƯU LẠI VÀ CẬP NHẬT GIAO DIỆN
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert("Sản phẩm đã được thêm vào giỏ hàng thành công!");
+    
 }
 
 
 // 3. Cập nhật số lượng hiển thị trên icon giỏ hàng ở Menu
+// Hàm cập nhật số lượng hiển thị trên icon giỏ hàng
 function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    // Luôn luôn tìm thẻ cart-count mới nhất trên giao diện
     const cartCountEl = document.getElementById('cart-count');
-    if (cartCountEl) cartCountEl.innerText = total;
+    
+    if (cartCountEl) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        // Tính tổng số lượng
+        let total = cart.reduce((sum, item) => sum + item.quantity, 0);
+        // Cập nhật số
+        cartCountEl.innerText = total;
+        console.log("Đã cập nhật giỏ hàng lên số:", total);
+    } else {
+        console.error("Lỗi: Không tìm thấy thẻ id='cart-count' trên giao diện!");
+    }
 }
 
-// Chạy các hàm khi trang web tải xong
-window.onload = function() {
-    renderProducts();
+// Hàm addToCart phải gọi updateCartCount sau khi lưu
+function addToCart(id) {
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        alert("Vui lòng đăng nhập để mua hàng!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let itemExisted = cart.find(item => item.id === id);
+    
+    if (itemExisted) {
+        itemExisted.quantity += 1;
+    } else {
+        cart.push({ id: id, quantity: 1 });
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // GỌI CẬP NHẬT NGAY TẠI ĐÂY
     updateCartCount();
-};
-
-
+    alert("Đã thêm vào giỏ hàng!");
+}
 
 
 //4. Hàm lọc sản phẩm theo danh mục

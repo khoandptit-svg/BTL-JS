@@ -55,17 +55,24 @@ function handleLogin() {
 // Hàm kiểm tra trạng thái đăng nhập và cập nhật giao diện Header
 function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    const authLink = document.querySelector('.checkout-nav a[href="login.html"]');
+    const navContainer = document.querySelector('.checkout-nav');
 
-    if (currentUser && authLink) {
-        // Nếu đã đăng nhập: Thay chữ "Đăng nhập" bằng tên user và nút Đăng xuất
-        authLink.parentElement.innerHTML = `
-            <span style="color: #ffeb3b; font-weight: bold;">Chào, ${currentUser.username}</span>
-            <a href="#" onclick="handleLogout()" style="margin-left: 15px;">Đăng xuất</a>
-            <a href="cart.html">Giỏ hàng</a>
+    if (currentUser && navContainer) {
+        // Vẽ lại nội dung Header khi đã đăng nhập
+        navContainer.innerHTML = `
+            <span style="color: #fff; font-weight: bold; margin-right: 10px;">Chào, ${currentUser.username}</span>
+            <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
+            <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
         `;
+        
+        // CỰC KỲ QUAN TRỌNG: Gọi hàm này để lấy số từ localStorage đổ vào thẻ <span> vừa tạo ở trên
+        if (typeof updateCartCount === "function") {
+            updateCartCount();
+        }
     }
 }
+// Đảm bảo hàm này chạy mỗi khi trang load
+document.addEventListener('DOMContentLoaded', checkLoginStatus);
 
 // Hàm xử lý đăng xuất
 function handleLogout() {
