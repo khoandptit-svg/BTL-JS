@@ -70,6 +70,23 @@ const products = [
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR15fJn9_Kz-vKCWUQe9Ko1bNpiSxP1qD2z0Q&s",
         category: "noi-com",
         description: "Công nghệ cao tần IH giúp cơm chín đều, thơm ngon."
+    },
+    {
+        id: 9,
+        name: "Máy Xay Sữa Hạt MAGIC A-103",
+        price: 1790000,
+        oldPrice: 2290000,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaZmLUHMB5TFbR-IReMkjSHxVid18gsiWP9g&s",
+        category: "may-xay",
+        description: "Công nghệ xay nhuyễn, thơm ngon."
+    },
+    {
+        id: 10,
+        name: "Quạt Tuần Hoàn Không Khí MAGIC A-256",
+        price: 1570000,
+        oldPrice: 1990000,
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGfAXQJdT9utPGsXHCrhFyB1d_sWf6bQCxYg&s",
+        category: "quat",
+        description: "xoay 4D đảo chiều gió, làm mát toàn diện."
     }
-
 ];
