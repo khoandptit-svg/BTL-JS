@@ -1,7 +1,5 @@
 // 1. Hàm hiển thị danh sách sản phẩm ra trang chủ
 // 1. Hàm hiển thị lại sản phẩm (có thêm onclick)
-// Thêm tham số data để nhận danh sách sản phẩm (Tất cả hoặc Đã lọc)
-// 1. Hàm hiển thị sản phẩm (Sửa để nhận tham số data)
 function renderProducts(data = products) { 
     const productList = document.getElementById('product-list');
     if (!productList) return;
@@ -17,32 +15,6 @@ function renderProducts(data = products) {
             </div>`;
     });
 }
-
-// 2. Hàm mở bảng nhỏ (Đã thêm lệnh hiển thị block)
-function openProductModal(id) {
-    const product = products.find(p => p.id === id);
-    if (!product) return;
-    
-    let modal = document.getElementById('product-modal');
-    if(!modal) return;
-
-    // Đổ dữ liệu
-    document.getElementById('modal-img').src = product.image;
-    document.getElementById('modal-name').innerText = product.name;
-    document.getElementById('modal-price').innerText = product.price.toLocaleString('vi-VN') + " đ";
-    document.getElementById('modal-desc').innerText = product.description || "Chưa có mô tả.";
-    
-    // HIỂN THỊ BẢNG (Dòng này cực kỳ quan trọng)
-    modal.style.display = "block";
-}
-
-
-// 3. Hàm đóng bảng
-function closeModal() {
-    document.getElementById("product-modal").style.display = "none";
-}
-
-
 
 // 3. Cập nhật số lượng hiển thị trên icon giỏ hàng ở Menu
 // Hàm cập nhật số lượng hiển thị trên icon giỏ hàng
