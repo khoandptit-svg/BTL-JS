@@ -10,22 +10,16 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/banner.css">
     <link rel="stylesheet" href="css/product.css">
-   
-    
 </head>
 <body>
 <header>
     <div class="header-container">
         <div class="logo">
-            <a href="index.html">
-                <img src="images/logoKTA.png" alt="Logo KTA">             
-            </a>
+            <a href="index.html"><img src="images/logoKTA.png" alt="Logo KTA"></a>
         </div>
-
         <div class="header-center">
             <h1 class="brand-name">KTA SHOP</h1>
         </div>
-
         <div class="header-right">
             <nav class="checkout-nav">
                 <a href="login.html">Đăng nhập</a>
@@ -35,54 +29,44 @@
     </div>
 </header>
 
-    <main class="checkout-page">
-        <div class="checkout-form">
-            <h2>THÔNG TIN GIAO HÀNG</h2>
-            <form id="order-form">
-                <div class="form-group">
-                    <label>Họ và tên</label>
-                    <input type="text" id="fullname" placeholder="Nhập tên người nhận" required>
-                </div>
-                <div class="form-group">
-                    <label>Số điện thoại</label>
-                    <input type="tel" id="phone" placeholder="Số điện thoại liên hệ" required>
-                </div>
-                <div class="form-group">
-                    <label>Địa chỉ nhận hàng</label>
-                    <textarea id="address" rows="3" placeholder="Số nhà, tên đường, phường/xã, quận/huyện..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Ghi chú (tùy chọn)</label>
-                    <textarea id="note" rows="2" placeholder="Lưu ý cho người giao hàng"></textarea>
-                </div>
-            </form>
-        </div>
+<main class="checkout-page">
+    <div class="checkout-form">
+        <h2>THÔNG TIN GIAO HÀNG</h2>
+        <form id="order-form">
+            <div class="form-group">
+                <label>Họ và tên</label>
+                <input type="text" id="fullname" placeholder="Nhập tên người nhận" required>
+            </div>
+            <div class="form-group">
+                <label>Số điện thoại</label>
+                <input type="tel" id="phone" placeholder="Số điện thoại liên hệ" required>
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ nhận hàng</label>
+                <textarea id="address" rows="3" placeholder="Số nhà, tên đường, phường/xã, quận/huyện..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Ghi chú (tùy chọn)</label>
+                <textarea id="note" rows="2" placeholder="Lưu ý cho người giao hàng"></textarea>
+            </div>
+        </form>
+    </div>
 
-        <div class="order-review">
-            <h3>ĐƠN HÀNG CỦA BẠN</h3>
-            <div id="review-list">
-                </div>
-            <div class="total-price">Tổng cộng: <span id="checkout-total">0 đ</span></div>
-            <button type="button" class="btn-confirm" onclick="confirmOrder()">XÁC NHẬN ĐẶT HÀNG</button>
-        </div>
-    </main>
+    <div class="order-review">
+        <h3>ĐƠN HÀNG CỦA BẠN</h3>
+        <div id="review-list"></div>
+        <div class="total-price">Tổng cộng: <span id="checkout-total">0 đ</span></div>
+        <button type="button" class="btn-confirm" onclick="confirmOrder()">XÁC NHẬN ĐẶT HÀNG</button>
+    </div>
+</main>
 
-    <script src="js/data.js"></script>
-    <script src="js/checkout.js"></script>
-    <script src="js/auth.js"></script>
-    
-
-    <!-- Phần chân trang (footer)  -->
 <footer class="main-footer">
     <div class="footer-container">
         <div class="footer-col">
             <h3>KTA SHOP</h3>
             <p>Chuyên cung cấp đồ gia dụng thông minh, chính hãng Magic Eco. Mang lại sự tiện nghi cho căn bếp nhà bạn.</p>
-            <div class="social-links">
-                <a href="#">🌐 Website</a>
-            </div>
+            <div class="social-links"><a href="#">🌐 Website</a></div>
         </div>
-
         <div class="footer-col">
             <h4>Thông Tin Liên Hệ</h4>
             <p>📍 Địa chỉ: Hà Nội, Việt Nam</p>
@@ -96,6 +80,9 @@
     </div>
 </footer>
 
+<script src="js/data.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/auth.js"></script>
 
 </body>
 </html>
