@@ -4,7 +4,7 @@ function getCartKey() {
     return user ? `cart_${user.username}` : null;
 }
 
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Kiểm tra đăng nhập - chưa đăng nhập thì chuyển về login
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
@@ -24,6 +24,8 @@ window.onload = function() {
         window.location.href = "index.html";
         return;
     }
+
+    if (!reviewList || !totalEl) return;
 
     reviewList.innerHTML = "";
     cart.forEach(item => {
@@ -46,7 +48,7 @@ window.onload = function() {
     });
 
     totalEl.innerText = total.toLocaleString('vi-VN') + " đ";
-};
+});
 
 // hàm xử lý khi nhấn nút "Xác nhận đơn hàng"
 function confirmOrder() {
