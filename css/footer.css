@@ -1,10 +1,18 @@
-/* Footer Styles */
 .main-footer {
-    clear: both; /* Quan trọng: Ngăn không cho footer nhảy lên trên các phần tử float */
-    background-color: #222;
+    clear: both;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #fff;
-    padding: 50px 0 20px;
-    margin-top: 50px;
+    padding: 56px 0 24px;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+}
+.main-footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--green), var(--red), var(--green));
 }
 
 .footer-container {
@@ -14,51 +22,56 @@
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 0 5%;
-    gap: 30px;
+    gap: 40px;
 }
 
-.footer-col {
-    flex: 1;
-    min-width: 250px;
-}
+.footer-col { flex: 1; min-width: 220px; }
 
-.footer-col h3, .footer-col h4 {
-    color: #38a149; /* Màu xanh lá cây chủ đạo của KTA */
-    margin-bottom: 20px;
+.footer-col h3 {
+    color: var(--green);
+    margin-bottom: 18px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.footer-col h4 {
+    color: #e0e0e0;
+    margin-bottom: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
 }
 
 .footer-col p {
-    line-height: 1.8;
-    color: #ccc;
-    margin-bottom: 10px;
-}
-
-.footer-col ul li {
-    margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-    color: #ccc;
-    transition: 0.3s;
-}
-
-.footer-col ul li a:hover {
-    color: #38a149;
-    padding-left: 5px;
-}
-
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid #444;
-    margin-top: 40px;
-    padding-top: 20px;
-    color: #888;
+    line-height: 1.9;
+    color: #9a9ab0;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .social-links a {
     color: #fff;
-    margin-right: 15px;
+    background: rgba(255,255,255,0.08);
+    padding: 6px 14px;
+    border-radius: 50px;
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: var(--transition);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+.social-links a:hover {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 48px;
+    padding-top: 22px;
+    color: #555770;
+    font-size: 13px;
 }
