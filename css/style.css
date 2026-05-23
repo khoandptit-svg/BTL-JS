@@ -52,9 +52,26 @@ ul { list-style: none; }
     .banner h2 { font-size: 22px; }
     .banner p { font-size: 14px; }
     .product-container { grid-template-columns: repeat(2, 1fr); padding: 0 12px; }
-    .cart-container { overflow-x: auto; padding: 10px; }
-    .cart-table { font-size: 12px; display: block; overflow-x: auto; white-space: nowrap; }
-    .cart-table th, .cart-table td { padding: 8px; }
+
+    /* Cart mobile: ẩn cột, hiện dạng card */
+    .cart-table thead { display: none; }
+    .cart-table, .cart-table tbody, .cart-table tr, .cart-table td { display: block; width: 100%; }
+    .cart-table tr {
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 14px;
+        padding: 12px;
+        background: var(--bg-card);
+        position: relative;
+    }
+    .cart-table td {
+        text-align: left;
+        padding: 6px 8px;
+        border: none;
+        font-size: 13px;
+    }
+    .cart-table td:first-child { text-align: center; }
+    .cart-table td img { width: 80px; height: 80px; }
     .cart-summary { float: none; width: 100%; margin-top: 20px; }
 }
 
