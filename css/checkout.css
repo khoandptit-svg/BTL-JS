@@ -1,173 +1,190 @@
-/* css/checkout.css */
-
-.checkout-page { 
-    padding: 40px 5%; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    display: flex; /* Chia layout thành 2 cột: Form và Tóm tắt đơn hàng */
-    gap: 30px; 
-    flex-wrap: wrap; /* Tự động xuống hàng nếu màn hình quá hẹp (Mobile) */
+.checkout-page {
+    padding: 48px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
 }
 
-.checkout-form { 
-    flex: 2; 
-    background: #fff; 
-    padding: 25px; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+/* Form thông tin */
+.checkout-form {
+    flex: 2;
+    background: var(--bg-card);
+    padding: 32px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1.5px solid var(--border);
 }
 
-.order-review { 
-    flex: 1; /* Cột tóm tắt chiếm tỷ lệ ít hơn (1 phần) */
-    background: #f9f9f9; 
-    padding: 25px; 
-    border-radius: 8px; 
-    border: 1px solid #eee; 
-    height: fit-content; /* Chiều cao tự co theo nội dung, không kéo dài thừa */
+.checkout-form h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--green-light);
+    letter-spacing: 1px;
 }
 
-.form-group { 
-    margin-bottom: 15px; 
+.form-group { margin-bottom: 18px; }
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.form-group label { 
-    display: block; 
-    margin-bottom: 5px; 
-    font-weight: bold; 
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--bg);
+    transition: var(--transition);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--green);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(45, 158, 79, 0.12);
 }
 
-.form-group input, 
-.form-group textarea { 
-    width: 100%; 
-    padding: 10px; 
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    outline: none; 
+/* Tóm tắt đơn hàng */
+.order-review {
+    flex: 1;
+    min-width: 280px;
+    background: var(--bg-card);
+    padding: 28px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+    position: sticky;
+    top: 90px;
 }
 
-.form-group input:focus { 
-    border-color: #38a149; 
+.order-review h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+    letter-spacing: 1px;
 }
 
-.review-item { 
-    display: flex; 
-    justify-content: space-between; 
-    margin-bottom: 10px; 
-    border-bottom: 1px solid #eee; 
-    padding-bottom: 10px; 
-}
-
-.total-price { 
-    font-size: 20px; 
-    color: #c61d23; 
-    font-weight: bold; 
-    text-align: right; 
-    margin-top: 15px; 
-}
-
-.btn-confirm { 
-    width: 100%; 
-    padding: 15px; 
-    background: #38a149; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    font-size: 16px; 
-    font-weight: bold; 
-    margin-top: 20px; 
-    transition: 0.3s; 
-}
-
-.btn-confirm:hover { 
-    background: #2d813a; 
-}
-
-/* Ảnh sản phẩm trong bản tóm tắt */
 .review-item {
     display: flex;
-    align-items: center; /* Căn giữa ảnh và chữ theo chiều dọc */
-    gap: 15px;
-    padding: 10px 0;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
 }
+.review-item:last-of-type { border-bottom: none; }
 
 .review-item img {
-    width: 60px; /* Độ rộng ảnh nhỏ gọn */
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid #eee;
+    width: 56px; height: 56px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    padding: 4px;
+    background: var(--bg);
 }
 
 .review-info {
-    flex: 1; /* Để phần thông tin chiếm hết chỗ còn lại */
+    flex: 1;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .review-name {
-    font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+.review-name small { color: var(--text-muted); font-weight: 400; }
+
+.review-info span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+    white-space: nowrap;
 }
 
-/* Cấu trúc Header */
+.total-price {
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-align: right;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 2px solid var(--border);
+}
+.total-price span {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--red);
+    margin-top: 4px;
+}
+
+.btn-confirm {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 800;
+    margin-top: 20px;
+    letter-spacing: 0.8px;
+    transition: var(--transition);
+    box-shadow: 0 6px 16px rgba(45, 158, 79, 0.3);
+}
+.btn-confirm:hover {
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(211, 47, 47, 0.35);
+}
+
+/* Header dùng chung */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 10px 5%;
+    padding: 12px 5%;
+    gap: 20px;
 }
-
-/* Phần bên trái - Giữ Logo sát lề trái */
-.header-left {
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-}
-
-/* Phần chính giữa - Chữ KTA đỏ */
-.header-center {
-    flex: 1;
-    text-align: center;
-}
-
+.header-left { flex: 1; display: flex; justify-content: flex-start; }
+.header-center { flex: 1; text-align: center; }
 .brand-name {
-    color: #ff0000;
-    font-size: 35px;
-    font-weight: 900;
-    margin: 0;
-    letter-spacing: 5px;
-    text-shadow: 1px 1px 0px #fff;
+    color: #fff; font-size: 28px; font-weight: 800;
+    margin: 0; letter-spacing: 6px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.15);
 }
-
-/* Phần bên phải - Đẩy Menu sát lề phải */
-.header-right {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end; /* Đẩy nội dung về bên phải */
-}
-
-.checkout-nav {
-    display: flex;
-    gap: 25px; /* Khoảng cách giữa Trang chủ và Giỏ hàng */
-}
-
+.header-right { flex: 1; display: flex; justify-content: flex-end; }
+.checkout-nav { display: flex; gap: 8px; align-items: center; }
 .checkout-nav a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 15px;
-    transition: color 0.3s;
+    color: rgba(255,255,255,0.92); font-weight: 600; font-size: 14px;
+    text-decoration: none; padding: 7px 14px; border-radius: 50px;
+    transition: var(--transition);
 }
-
-.checkout-nav a:hover {
-    color: #ffeb3b; /* Hiệu ứng đổi màu khi di chuột */
-}
-
-/* Chỉnh Logo gọn gàng */
-.logo img {
-    height: 50px;
-    width: auto;
-}
+.checkout-nav a:hover { background: rgba(255,255,255,0.2); color: #fff; }
+.logo img { height: 52px; width: auto; }
