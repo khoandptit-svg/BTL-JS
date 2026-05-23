@@ -14,25 +14,17 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
-
 <body>
 
-
-    <!-- Header/Menu -->
 <header>
-   
     <div class="header-container">
         <div class="logo">
-            <a href="index.html">
-                <img src="images/logoKTA.png" alt="Logo KTA">             
-            </a>
+            <a href="index.html"><img src="images/logoKTA.png" alt="Logo KTA"></a>
         </div>
-
         <div class="search-container">
             <input type="text" id="search-input" placeholder="Bạn tìm gì hôm nay?">
             <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm</button>
         </div>
-
         <div class="header-right">
             <nav class="checkout-nav">
                 <a href="login.html">Đăng nhập</a>
@@ -40,18 +32,13 @@
             </nav>
         </div>
     </div>
-
 </header>
 
+<section class="banner">
+    <h2>MUA SẮM ĐỒ GIA DỤNG THÔNG MINH</h2>
+    <p>Ưu đãi lên đến 40% - Bảo hành chính hãng</p>
+</section>
 
-    <!-- Banner -->
-    <section class="banner">
-        <h2>MUA SẮM ĐỒ GIA DỤNG THÔNG MINH</h2>
-        <p>Ưu đãi lên đến 40% - Bảo hành chính hãng</p>
-    </section>
-
-
-    <!-- Bộ lọc sản phẩm -->
 <div class="filter-container">
     <button class="filter-btn active" onclick="filterProducts('all')">Tất cả</button>
     <button class="filter-btn" onclick="filterProducts('noi-chien')">Nồi Chiên</button>
@@ -61,28 +48,18 @@
     <button class="filter-btn" onclick="filterProducts('quat')">Quạt</button>
 </div>
 
-
-<!-- Danh sách sản phẩm -->
 <main>
     <h2 class="title">Sản Phẩm</h2>
-
-    <div class="product-container" id="product-list">
-        <!-- JS sẽ tự động đổ sản phẩm -->
-    </div>
+    <div class="product-container" id="product-list"></div>
 </main>
 
-
-<!-- Phần chân trang (footer) -->
 <footer class="main-footer">
     <div class="footer-container">
         <div class="footer-col">
             <h3>KTA SHOP</h3>
             <p>Chuyên cung cấp đồ gia dụng thông minh, chính hãng Magic Eco. Mang lại sự tiện nghi cho căn bếp nhà bạn.</p>
-            <div class="social-links">
-                <a href="#">🌐 Website</a>
-            </div>
+            <div class="social-links"><a href="#">🌐 Website</a></div>
         </div>
-
         <div class="footer-col">
             <h4>Thông Tin Liên Hệ</h4>
             <p>📍 Địa chỉ: Hà Nội, Việt Nam</p>
@@ -97,11 +74,9 @@
 </footer>
 
 <script src="js/data.js"></script>
-<script src="js/main.js"></script>   /*createModalHTML() chạy ở đây*/
+<script src="js/main.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/cart.js"></script>
-    
-    
 
 </body>
 </html>

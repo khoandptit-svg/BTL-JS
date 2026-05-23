@@ -1,11 +1,8 @@
-// 1. Hàm hiển thị danh sách trong trang cart.html
-// Hàm lấy key giỏ hàng theo user
 function getCartKey() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     return user ? `cart_${user.username}` : null;
 }
 
-// Hàm tạo HTML cho modal đăng nhập/đăng ký
 function renderCart() {
     const cartTableBody = document.getElementById('cart-table-body');
     if (!cartTableBody) return;
@@ -14,6 +11,20 @@ function renderCart() {
     let cart = key ? JSON.parse(localStorage.getItem(key)) || [] : [];
     cartTableBody.innerHTML = "";
     let total = 0;
+
+    if (cart.length === 0) {
+        cartTableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center; padding:40px; color:#999; font-size:16px;">
+                    🛒 Giỏ hàng của bạn đang trống
+                    <br><br>
+                    <a href="index.html" style="color:#38a149; font-weight:bold;">← Tiếp tục mua sắm</a>
+                </td>
+            </tr>`;
+        const totalPriceEl = document.getElementById('total-price');
+        if (totalPriceEl) totalPriceEl.innerText = "0 đ";
+        return;
+    }
 
     cart.forEach((item, index) => {
         const productInfo = products.find(p => p.id === item.id);
@@ -40,7 +51,6 @@ function renderCart() {
     if (totalPriceEl) totalPriceEl.innerText = total.toLocaleString('vi-VN') + " đ";
 }
 
-// Hàm thay đổi số lượng sản phẩm trong giỏ hàng
 function changeQuantity(index, delta) {
     const key = getCartKey();
     let cart = JSON.parse(localStorage.getItem(key)) || [];
@@ -50,7 +60,6 @@ function changeQuantity(index, delta) {
     updateCartCount();
 }
 
-// Hàm xóa sản phẩm khỏi giỏ hàng
 function removeFromCart(index) {
     const key = getCartKey();
     let cart = JSON.parse(localStorage.getItem(key)) || [];
@@ -60,7 +69,6 @@ function removeFromCart(index) {
     updateCartCount();
 }
 
-// 2. Hàm xử lý khi nhấn nút "Đặt hàng"
 function checkout() {
     alert("Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ liên hệ sớm.");
     const key = getCartKey();
@@ -68,11 +76,10 @@ function checkout() {
     location.reload();
 }
 
-
-// Chỉ chạy renderCart ở đây, KHÔNG gọi renderProducts (đã có trong main.js)
-window.onload = function() {
+// Dùng DOMContentLoaded thay vì window.onload để không xung đột main.js
+document.addEventListener('DOMContentLoaded', function() {
     createModalHTML();
     renderProducts();
     renderCart();
     updateCartCount();
-};
+});
