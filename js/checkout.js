@@ -1,15 +1,20 @@
-// Hiển thị tóm tắt sản phẩm trong giỏ hàng
-// Hàm lấy key giỏ hàng theo user
+// thêm sản phẩm vào giỏ hàng
 function getCartKey() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     return user ? `cart_${user.username}` : null;
 }
 
-// Hàm tạo HTML cho modal đăng nhập/đăng ký
 window.onload = function() {
+    // Kiểm tra đăng nhập - chưa đăng nhập thì chuyển về login
+    const currentUser = localStorage.getItem('currentUser');
+    if (!currentUser) {
+        alert("Vui lòng đăng nhập để thanh toán!");
+        window.location.href = "login.html";
+        return;
+    }
+
     const key = getCartKey();
     let cart = key ? JSON.parse(localStorage.getItem(key)) || [] : [];
-
     const reviewList = document.getElementById('review-list');
     const totalEl = document.getElementById('checkout-total');
     let total = 0;
@@ -21,7 +26,6 @@ window.onload = function() {
     }
 
     reviewList.innerHTML = "";
-
     cart.forEach(item => {
         const p = products.find(product => product.id === item.id);
         if (p) {
@@ -32,7 +36,7 @@ window.onload = function() {
                     <img src="${p.image}" alt="${p.name}">
                     <div class="review-info">
                         <div class="review-name">
-                            ${p.name} <br>
+                            ${p.name}<br>
                             <small>SL: ${item.quantity}</small>
                         </div>
                         <span>${subtotal.toLocaleString('vi-VN')} đ</span>
@@ -44,11 +48,11 @@ window.onload = function() {
     totalEl.innerText = total.toLocaleString('vi-VN') + " đ";
 };
 
-// Hàm xử lý khi nhấn nút "Đặt hàng"
+// hàm xử lý khi nhấn nút "Xác nhận đơn hàng"
 function confirmOrder() {
-    const name = document.getElementById('fullname').value;
-    const phone = document.getElementById('phone').value;
-    const address = document.getElementById('address').value;
+    const name = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
 
     if (!name || !phone || !address) {
         alert("Vui lòng điền đầy đủ thông tin giao hàng!");
@@ -56,9 +60,8 @@ function confirmOrder() {
     }
 
     alert(`Chúc mừng ${name}!\nĐơn hàng của bạn đang được xử lý.\nChúng tôi sẽ giao đến: ${address}`);
-    
+
     const key = getCartKey();
     if (key) localStorage.removeItem(key);
-    
     window.location.href = "index.html";
 }
