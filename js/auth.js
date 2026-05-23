@@ -13,8 +13,8 @@ function toggleAuth() {
 
 // Xử lý Đăng Ký
 function handleRegister() {
-    const user = document.getElementById('reg-user').value;
-    const pass = document.getElementById('reg-pass').value;
+    const user = document.getElementById('reg-user').value.trim();
+    const pass = document.getElementById('reg-pass').value.trim();
     
     if (!user || !pass) {
         alert("Vui lòng nhập đủ thông tin!");
@@ -23,7 +23,6 @@ function handleRegister() {
 
     let users = JSON.parse(localStorage.getItem('users')) || [];
     
-    // Kiểm tra tên đăng nhập đã tồn tại chưa
     if (users.find(u => u.username === user)) {
         alert("Tên đăng nhập đã tồn tại!");
         return;
@@ -37,9 +36,15 @@ function handleRegister() {
 
 // Xử lý Đăng Nhập
 function handleLogin() {
-    const user = document.getElementById('login-user').value;
-    const pass = document.getElementById('login-pass').value;
-    
+    const user = document.getElementById('login-user').value.trim();
+    const pass = document.getElementById('login-pass').value.trim();
+
+    // Kiểm tra trống TRƯỚC
+    if (!user || !pass) {
+        alert("Vui lòng nhập thông tin đăng nhập!");
+        return;
+    }
+
     let users = JSON.parse(localStorage.getItem('users')) || [];
     const foundUser = users.find(u => u.username === user && u.password === pass);
 
@@ -58,28 +63,22 @@ function checkLoginStatus() {
     const navContainer = document.querySelector('.checkout-nav');
 
     if (currentUser && navContainer) {
-        // Vẽ lại nội dung Header khi đã đăng nhập
         navContainer.innerHTML = `
             <span style="color: #fff; font-weight: bold; margin-right: 10px;">Chào, ${currentUser.username}</span>
             <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
             <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
         `;
-        
-        // CỰC KỲ QUAN TRỌNG: Gọi hàm này để lấy số từ localStorage đổ vào thẻ <span> vừa tạo ở trên
         if (typeof updateCartCount === "function") {
             updateCartCount();
         }
     }
 }
-// Đảm bảo hàm này chạy mỗi khi trang load
+
 document.addEventListener('DOMContentLoaded', checkLoginStatus);
 
 // Hàm xử lý đăng xuất
 function handleLogout() {
     localStorage.removeItem('currentUser');
     alert("Bạn đã đăng xuất!");
-    window.location.reload(); // Tải lại trang để cập nhật giao diện
+    window.location.reload();
 }
-
-// Chạy hàm kiểm tra ngay khi trang web tải xong
-document.addEventListener('DOMContentLoaded', checkLoginStatus);
