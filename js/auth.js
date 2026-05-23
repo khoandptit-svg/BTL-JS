@@ -93,3 +93,64 @@ function handleLogout() {
     alert("Bạn đã đăng xuất!");
     window.location.reload();
 }
+
+// Hiện form quên mật khẩu
+function showForgotPassword(){
+
+    document.getElementById('login-form').style.display = "none";
+
+    document.getElementById('register-form').style.display = "none";
+
+    document.getElementById('forgot-form').style.display = "block";
+}
+
+
+// Quay lại đăng nhập
+function backToLogin(){
+
+    document.getElementById('forgot-form').style.display = "none";
+
+    document.getElementById('login-form').style.display = "block";
+}
+
+
+// Đổi mật khẩu
+function resetPassword(){
+
+    const username = document
+        .getElementById('forgot-user')
+        .value
+        .trim();
+
+    const newPassword = document
+        .getElementById('new-pass')
+        .value
+        .trim();
+
+    if(!username || !newPassword){
+
+        alert("Vui lòng nhập đầy đủ thông tin!");
+
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Tìm user
+    let foundUser = users.find(u => u.username === username);
+
+    if(foundUser){
+
+        foundUser.password = newPassword;
+
+        localStorage.setItem('users', JSON.stringify(users));
+
+        alert("Đổi mật khẩu thành công!");
+
+        backToLogin();
+
+    }else{
+
+        alert("Tên đăng nhập không tồn tại!");
+    }
+}
