@@ -1,13 +1,6 @@
-/* ==========================================================
-   SEARCH SCRIPT - KTA SHOP
-   Xử lý tìm kiếm sản phẩm và hiển thị kết quả
-   ========================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Lấy từ khóa (query) từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('query');
-
     const titleEl = document.getElementById('search-title');
     const resultsContainer = document.getElementById('search-results');
 
@@ -16,40 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Hiển thị tiêu đề kết quả
     if (titleEl) titleEl.innerText = `Kết quả tìm kiếm cho: "${searchQuery}"`;
-
-    // 2. Tiến hành lọc sản phẩm
     performSearch(searchQuery.toLowerCase().trim(), resultsContainer);
 });
 
-// Hàm lọc và hiển thị
 function performSearch(keyword, container) {
     if (!container) return;
-
-    // Kiểm tra xem biến 'products' từ data.js có tồn tại không
     if (typeof products === 'undefined') {
         container.innerHTML = "<p>Lỗi: Không thể kết nối dữ liệu sản phẩm.</p>";
         return;
     }
-
-    // Lọc danh sách (không phân biệt hoa thường)
-    const filteredResults = products.filter(product => 
+    const filteredResults = products.filter(product =>
         product.name.toLowerCase().includes(keyword)
     );
-
-    // 3. Render kết quả ra màn hình
     renderItems(filteredResults, container);
 }
 
 function renderItems(list, container) {
-    container.innerHTML = ""; // Xóa nội dung cũ
+    container.innerHTML = "";
 
     if (list.length === 0) {
         container.innerHTML = `
             <div style="grid-column: 1/-1; text-align:center; padding: 50px;">
-                <p>Không tìm thấy sản phẩm nào phù hợp.</p>
-                <a href="index.html" style="color: #38a149; font-weight: bold;">Tiếp tục mua sắm</a>
+                <p style="font-size:18px; color:#666;">Không tìm thấy sản phẩm nào phù hợp.</p>
+                <a href="index.html" style="color: #38a149; font-weight: bold;">← Tiếp tục mua sắm</a>
             </div>`;
         return;
     }
@@ -57,11 +40,14 @@ function renderItems(list, container) {
     list.forEach(product => {
         container.innerHTML += `
             <div class="product-card">
-                <img src="${product.image}" alt="${product.name}">
+                ${product.oldPrice ? `<span class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</span>` : ''}
+                <img src="${product.image}" alt="${product.name}" onclick="openProductModal(${product.id})" style="cursor:pointer;">
                 <h3>${product.name}</h3>
-                <p class="price">${product.price.toLocaleString('vi-VN')} đ</p>
+                <p class="price">
+                    ${product.price.toLocaleString('vi-VN')} đ
+                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString('vi-VN')} đ</span>` : ''}
+                </p>
                 <button onclick="addToCart(${product.id})">Thêm vào giỏ</button>
-            </div>
-        `;
+            </div>`;
     });
 }
