@@ -120,7 +120,20 @@ function addToCart(id) {
 
     localStorage.setItem(key, JSON.stringify(cart));
     updateCartCount();
-    alert("Đã thêm vào giỏ hàng!");
+
+    // Loading state cho nút bấm
+    const btns = document.querySelectorAll(`.add-to-cart-btn[onclick="addToCart(${id})"], button[onclick="addToCart(${id})"]`);
+    btns.forEach(btn => {
+        const original = btn.textContent;
+        btn.textContent = "✓ Đã thêm!";
+        btn.style.background = "var(--green-dark)";
+        btn.disabled = true;
+        setTimeout(() => {
+            btn.textContent = original;
+            btn.style.background = "";
+            btn.disabled = false;
+        }, 1200);
+    });
 }
 
 
@@ -160,4 +173,4 @@ document.addEventListener('DOMContentLoaded', function() {
     createModalHTML();
     renderProducts(); 
     updateCartCount();
-}); 
+});
