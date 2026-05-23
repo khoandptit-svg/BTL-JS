@@ -62,15 +62,26 @@ function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const navContainer = document.querySelector('.checkout-nav');
 
-    if (currentUser && navContainer) {
-        navContainer.innerHTML = `
-            <span style="color: #fff; font-weight: bold; margin-right: 10px;">Chào, ${currentUser.username}</span>
-            <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
-            <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
-        `;
-        if (typeof updateCartCount === "function") {
-            updateCartCount();
+    if (navContainer) {
+        if (currentUser) {
+            navContainer.innerHTML = `
+                <span style="color: #fff; font-weight: bold; margin-right: 10px;">Chào, ${currentUser.username}</span>
+                <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
+                <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
+            `;
+        } else {
+            // Chưa đăng nhập: vẫn giữ cart-count trong nav mặc định
+            const cartCountEl = navContainer.querySelector('#cart-count');
+            if (!cartCountEl) {
+                const cartLink = navContainer.querySelector('#cart-link');
+                if (cartLink) cartLink.innerHTML = `Giỏ hàng (<span id="cart-count">0</span>)`;
+            }
         }
+
+        // Luôn cập nhật số lượng sau khi nav đã render xong
+        requestAnimationFrame(() => {
+            if (typeof updateCartCount === "function") updateCartCount();
+        });
     }
 }
 
