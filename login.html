@@ -21,22 +21,9 @@
             <h2>ĐĂNG NHẬP</h2>
             <input type="text" id="login-user" placeholder="Tên đăng nhập">
             <input type="password" id="login-pass" placeholder="Mật khẩu">
-            <button onclick="handleLogin()" class="btn-auth">
-                Đăng nhập
-            </button>
-
-            <p>
-                <a href="#" onclick="showForgotPassword()">
-                    Quên mật khẩu?
-                </a>
-            </p>
-
-            <p>
-                 Chưa có tài khoản?
-                <a href="#" onclick="toggleAuth()">
-                    Đăng ký ngay
-                </a>
-            </p>
+            <button onclick="handleLogin()" class="btn-auth">Đăng nhập</button>
+            <p><a href="#" onclick="showForgotPassword()">Quên mật khẩu?</a></p>
+            <p>Chưa có tài khoản? <a href="#" onclick="toggleAuth()">Đăng ký ngay</a></p>
         </div>
 
         <div id="register-form" class="auth-box" style="display: none;">
@@ -47,34 +34,15 @@
             <button onclick="handleRegister()" class="btn-auth">Đăng ký</button>
             <p>Đã có tài khoản? <a href="#" onclick="toggleAuth()">Đăng nhập</a></p>
         </div>
+
+        <div id="forgot-form" class="auth-box" style="display: none;">
+            <h2>QUÊN MẬT KHẨU</h2>
+            <input type="text" id="forgot-user" placeholder="Nhập tên đăng nhập">
+            <input type="password" id="new-pass" placeholder="Nhập mật khẩu mới">
+            <button onclick="resetPassword()" class="btn-auth">Đổi mật khẩu</button>
+            <p><a href="#" onclick="backToLogin()">Quay lại đăng nhập</a></p>
+        </div>
     </div>
-    <div id="forgot-form" class="auth-box" style="display: none;">
-
-        <h2>QUÊN MẬT KHẨU</h2>
-
-        <input 
-            type="text" 
-            id="forgot-user"
-            placeholder="Nhập tên đăng nhập"
-        >
-
-        <input 
-            type="password" 
-            id="new-pass"
-            placeholder="Nhập mật khẩu mới"
-        >
-
-        <button onclick="resetPassword()" class="btn-auth">
-            Đổi mật khẩu
-        </button>
-
-        <p>
-            <a href="#" onclick="backToLogin()">
-            Quay lại đăng nhập
-        </a>
-    </p>
-
-</div>
     <script src="js/auth.js"></script>
 </body>
 </html>
