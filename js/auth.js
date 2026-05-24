@@ -15,19 +15,19 @@ function toggleAuth() {
 function handleRegister() {
     const user = document.getElementById('reg-user').value.trim();
     const pass = document.getElementById('reg-pass').value.trim();
-    
+    // Kiểm tra trống TRƯỚC
     if (!user || !pass) {
         alert("Vui lòng nhập đủ thông tin!");
         return;
     }
-
+    // Kiểm tra tồn tại TRƯỚC
     let users = JSON.parse(localStorage.getItem('users')) || [];
-    
+    // Kiểm tra nếu username đã tồn tại
     if (users.find(u => u.username === user)) {
         alert("Tên đăng nhập đã tồn tại!");
         return;
     }
-
+    // Thêm người dùng mới vào danh sách và lưu lại
     users.push({ username: user, password: pass });
     localStorage.setItem('users', JSON.stringify(users));
     alert("Đăng ký thành công! Hãy đăng nhập.");
@@ -44,10 +44,10 @@ function handleLogin() {
         alert("Vui lòng nhập thông tin đăng nhập!");
         return;
     }
-
+    // Kiểm tra thông tin đăng nhập với danh sách người dùng đã đăng ký
     let users = JSON.parse(localStorage.getItem('users')) || [];
     const foundUser = users.find(u => u.username === user && u.password === pass);
-
+    // Nếu tìm thấy người dùng, lưu thông tin vào localStorage và chuyển về trang chủ
     if (foundUser) {
         localStorage.setItem('currentUser', JSON.stringify(foundUser));
         alert("Đăng nhập thành công!");
@@ -61,7 +61,7 @@ function handleLogin() {
 function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const navContainer = document.querySelector('.checkout-nav');
-
+    // Nếu đã đăng nhập, hiển thị tên người dùng và nút đăng xuất; nếu chưa, giữ nguyên giao diện mặc định
     if (navContainer) {
         if (currentUser) {
             navContainer.innerHTML = `
@@ -69,6 +69,7 @@ function checkLoginStatus() {
                 <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
                 <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
             `;
+        // Nếu chưa đăng nhập: vẫn giữ cart-count trong nav mặc định
         } else {
             // Chưa đăng nhập: vẫn giữ cart-count trong nav mặc định
             const cartCountEl = navContainer.querySelector('#cart-count');
@@ -84,7 +85,7 @@ function checkLoginStatus() {
         });
     }
 }
-
+// Hàm xử lý đăng xuất
 document.addEventListener('DOMContentLoaded', checkLoginStatus);
 
 // Hàm xử lý đăng xuất

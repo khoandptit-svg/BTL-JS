@@ -24,13 +24,14 @@ function renderProducts(data = products) {
 function openProductModal(id) {
     const product = products.find(p => p.id === id);
     if (!product) return;
-
+    // Điền thông tin sản phẩm vào modal
     document.getElementById('modal-img').src = product.image;
     document.getElementById('modal-img').alt = product.name;
     document.getElementById('modal-name').textContent = product.name;
     document.getElementById('modal-desc').textContent = product.description;
     document.getElementById('modal-price').textContent = product.price.toLocaleString('vi-VN') + ' đ';
 
+    // Hiển thị giá cũ nếu có, ngược lại ẩn phần tử này
     const oldPriceEl = document.getElementById('modal-old-price');
     if (product.oldPrice) {
         oldPriceEl.textContent = product.oldPrice.toLocaleString('vi-VN') + ' đ';
@@ -44,6 +45,7 @@ function openProductModal(id) {
         closeProductModal();
     };
 
+    // Hiển thị modal
     const overlay = document.getElementById('product-modal-overlay');
     overlay.style.display = 'flex';
     setTimeout(() => overlay.classList.add('show'), 10);
@@ -56,7 +58,7 @@ function closeProductModal() {
     setTimeout(() => { overlay.style.display = 'none'; }, 280);
 }
 
-// Tạo HTML cho modal nếu chưa có
+// modal đã được tạo sẵn trong HTML, chỉ cần gọi hàm này để thêm vào DOM nếu chưa tồn tại
 function createModalHTML() {
     if (document.getElementById('product-modal-overlay')) return;
     document.body.insertAdjacentHTML('beforeend', `
@@ -108,6 +110,7 @@ function addToCart(id) {
         return;
     }
 
+    // Lấy giỏ hàng của user hiện tại
     const key = getCartKey();
     let cart = JSON.parse(localStorage.getItem(key)) || [];
     let itemExisted = cart.find(item => item.id === id);
@@ -118,10 +121,11 @@ function addToCart(id) {
         cart.push({ id: id, quantity: 1 });
     }
 
+    // Lưu lại giỏ hàng vào localStorage
     localStorage.setItem(key, JSON.stringify(cart));
     updateCartCount();
 
-    // Loading state cho nút bấm
+    // Hiệu ứng nút đã thêm vào giỏ hàng
     const btns = document.querySelectorAll(`.add-to-cart-btn[onclick="addToCart(${id})"], button[onclick="addToCart(${id})"]`);
     btns.forEach(btn => {
         const original = btn.textContent;
@@ -153,21 +157,26 @@ function filterProducts(category) {
 
 // ===== GIỎ HÀNG =====
 function handleSearch() {
+    // Lấy giá trị từ input tìm kiếm
     const searchInput = document.getElementById('search-input');
     if (!searchInput) return;
+    //  Chuyển hướng đến trang search.html với query là từ khóa tìm kiếm
     const keyword = searchInput.value.trim();
     if (keyword !== "") {
         window.location.href = `search.html?query=${encodeURIComponent(keyword)}`;
     }
 }
-
-document.getElementById('search-btn')?.addEventListener('click', handleSearch);
-document.getElementById('search-input')?.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') handleSearch();
+// Dùng DOMContentLoaded thay vì window.onload để không xung đột với các script khác
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('search-btn')?.addEventListener('click', handleSearch);
+    document.getElementById('search-input')?.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') handleSearch();
+    });
 });
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeProductModal();
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     createModalHTML();

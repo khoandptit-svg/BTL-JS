@@ -1,3 +1,4 @@
+// search.js - Xử lý tìm kiếm sản phẩm
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('query');
@@ -13,21 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
     performSearch(searchQuery.toLowerCase().trim(), resultsContainer);
 });
 
+// Hàm thực hiện tìm kiếm và hiển thị kết quả
 function performSearch(keyword, container) {
     if (!container) return;
     if (typeof products === 'undefined') {
         container.innerHTML = "<p>Lỗi: Không thể kết nối dữ liệu sản phẩm.</p>";
         return;
     }
+    // Lọc sản phẩm dựa trên tên chứa từ khóa tìm kiếm (không phân biệt hoa thường)
     const filteredResults = products.filter(product =>
         product.name.toLowerCase().includes(keyword)
     );
+    // Hiển thị kết quả tìm kiếm
     renderItems(filteredResults, container);
 }
 
+// Hàm render sản phẩm ra giao diện
 function renderItems(list, container) {
     container.innerHTML = "";
-
+    // Nếu không có kết quả nào, hiển thị thông báo
     if (list.length === 0) {
         container.innerHTML = `
             <div style="grid-column: 1/-1; text-align:center; padding: 50px;">
@@ -36,7 +41,7 @@ function renderItems(list, container) {
             </div>`;
         return;
     }
-
+    // Hiển thị từng sản phẩm trong danh sách kết quả
     list.forEach(product => {
         container.innerHTML += `
             <div class="product-card">
