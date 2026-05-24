@@ -19,7 +19,7 @@ function renderCart() {
         cartTableBody.innerHTML = `
             <tr>
                 <td colspan="6" style="text-align:center; padding:40px; color:#999; font-size:16px;">
-                    🛒 Giỏ hàng của bạn đang trống
+                    Giỏ hàng của bạn đang trống
                     <br><br>
                     <a href="index.html" style="color:#38a149; font-weight:bold;">← Tiếp tục mua sắm</a>
                 </td>
