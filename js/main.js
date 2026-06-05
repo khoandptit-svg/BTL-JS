@@ -156,9 +156,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') handleSearch();
     });
 
-    // Chỉ render modal và sản phẩm nếu trang có #product-list
-    if (document.getElementById('product-list')) {
+    // Tạo modal nếu trang có danh sách sản phẩm (index hoặc search)
+    if (document.getElementById('product-list') || document.getElementById('search-results')) {
         createModalHTML();
+    }
+    // Chỉ render sản phẩm nếu trang chủ có #product-list
+    if (document.getElementById('product-list')) {
         renderProducts();
     }
 

@@ -1,33 +1,30 @@
-// thêm sản phẩm vào giỏ hàng
-function getCartKey() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    return user ? `cart_${user.username}` : null;
-}
-// Cập nhật số lượng sản phẩm trong giỏ hàng ở Header
+// checkout.js - Xử lý trang thanh toán
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Kiểm tra đăng nhập - chưa đăng nhập thì chuyển về login
+    // Kiểm tra đăng nhập
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
         alert("Vui lòng đăng nhập để thanh toán!");
         window.location.href = "login.html";
         return;
     }
-    // Lấy giỏ hàng của user hiện tại
+
     const key = getCartKey();
     let cart = key ? JSON.parse(localStorage.getItem(key)) || [] : [];
-    const reviewList = document.getElementById('review-list');
-    const totalEl = document.getElementById('checkout-total');
-    let total = 0;
-    // Nếu giỏ hàng trống, hiển thị thông báo và link về trang chủ
+
     if (cart.length === 0) {
         alert("Giỏ hàng trống!");
         window.location.href = "index.html";
         return;
     }
+
+    const reviewList = document.getElementById('review-list');
+    const totalEl = document.getElementById('checkout-total');
     if (!reviewList || !totalEl) return;
 
-    // Hiển thị chi tiết đơn hàng
+    let total = 0;
     reviewList.innerHTML = "";
+
     cart.forEach(item => {
         const p = products.find(product => product.id === item.id);
         if (p) {
@@ -46,11 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>`;
         }
     });
-// Hiển thị tổng tiền
+
     totalEl.innerText = total.toLocaleString('vi-VN') + " đ";
+    updateCartCount();
 });
 
-// hàm xử lý khi nhấn nút "Xác nhận đơn hàng"
+// Xác nhận đặt hàng
 function confirmOrder() {
     const name = document.getElementById('fullname').value.trim();
     const phone = document.getElementById('phone').value.trim();
@@ -62,7 +60,7 @@ function confirmOrder() {
     }
 
     alert(`Chúc mừng ${name}!\nĐơn hàng của bạn đang được xử lý.\nChúng tôi sẽ giao đến: ${address}`);
-// Sau khi xác nhận, xóa giỏ hàng và chuyển về trang chủ
+
     const key = getCartKey();
     if (key) localStorage.removeItem(key);
     window.location.href = "index.html";

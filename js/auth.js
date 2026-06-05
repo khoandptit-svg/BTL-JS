@@ -1,4 +1,15 @@
-// Chuyển đổi giữa Đăng nhập và Đăng ký
+// auth.js - Xử lý đăng nhập, đăng ký, đăng xuất
+
+// ===== Hash mật khẩu bằng SHA-256 (Web Crypto API) =====
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ===== Chuyển đổi giữa form Đăng nhập / Đăng ký =====
 function toggleAuth() {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
@@ -11,45 +22,48 @@ function toggleAuth() {
     }
 }
 
-// Xử lý Đăng Ký
-function handleRegister() {
+// ===== Đăng Ký =====
+async function handleRegister() {
     const user = document.getElementById('reg-user').value.trim();
     const pass = document.getElementById('reg-pass').value.trim();
-    // Kiểm tra trống TRƯỚC
+
     if (!user || !pass) {
         alert("Vui lòng nhập đủ thông tin!");
         return;
     }
-    // Kiểm tra tồn tại TRƯỚC
+
     let users = JSON.parse(localStorage.getItem('users')) || [];
-    // Kiểm tra nếu username đã tồn tại
+
     if (users.find(u => u.username === user)) {
         alert("Tên đăng nhập đã tồn tại!");
         return;
     }
-    // Thêm người dùng mới vào danh sách và lưu lại
-    users.push({ username: user, password: pass });
+
+    // FIX: Lưu mật khẩu đã hash thay vì plaintext
+    const hashedPass = await hashPassword(pass);
+    users.push({ username: user, password: hashedPass });
     localStorage.setItem('users', JSON.stringify(users));
     alert("Đăng ký thành công! Hãy đăng nhập.");
     toggleAuth();
 }
 
-// Xử lý Đăng Nhập
-function handleLogin() {
+// ===== Đăng Nhập =====
+async function handleLogin() {
     const user = document.getElementById('login-user').value.trim();
     const pass = document.getElementById('login-pass').value.trim();
 
-    // Kiểm tra trống TRƯỚC
     if (!user || !pass) {
         alert("Vui lòng nhập thông tin đăng nhập!");
         return;
     }
-    // Kiểm tra thông tin đăng nhập với danh sách người dùng đã đăng ký
+
+    // FIX: So sánh với mật khẩu đã hash
+    const hashedPass = await hashPassword(pass);
     let users = JSON.parse(localStorage.getItem('users')) || [];
-    const foundUser = users.find(u => u.username === user && u.password === pass);
-    // Nếu tìm thấy người dùng, lưu thông tin vào localStorage và chuyển về trang chủ
+    const foundUser = users.find(u => u.username === user && u.password === hashedPass);
+
     if (foundUser) {
-        localStorage.setItem('currentUser', JSON.stringify(foundUser));
+        localStorage.setItem('currentUser', JSON.stringify({ username: foundUser.username }));
         alert("Đăng nhập thành công!");
         window.location.href = "index.html";
     } else {
@@ -57,11 +71,11 @@ function handleLogin() {
     }
 }
 
-// Hàm kiểm tra trạng thái đăng nhập và cập nhật giao diện Header
+// ===== Kiểm tra trạng thái đăng nhập & cập nhật Header =====
 function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const navContainer = document.querySelector('.checkout-nav');
-    // Nếu đã đăng nhập, hiển thị tên người dùng và nút đăng xuất; nếu chưa, giữ nguyên giao diện mặc định
+
     if (navContainer) {
         if (currentUser) {
             navContainer.innerHTML = `
@@ -69,89 +83,60 @@ function checkLoginStatus() {
                 <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
                 <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
             `;
-        // Nếu chưa đăng nhập: vẫn giữ cart-count trong nav mặc định
         } else {
-            // Chưa đăng nhập: vẫn giữ cart-count trong nav mặc định
-            const cartCountEl = navContainer.querySelector('#cart-count');
-            if (!cartCountEl) {
-                const cartLink = navContainer.querySelector('#cart-link');
-                if (cartLink) cartLink.innerHTML = `Giỏ hàng (<span id="cart-count">0</span>)`;
+            const cartLink = navContainer.querySelector('#cart-link');
+            if (cartLink && !cartLink.querySelector('#cart-count')) {
+                cartLink.innerHTML = `Giỏ hàng (<span id="cart-count">0</span>)`;
             }
         }
 
-        // Luôn cập nhật số lượng sau khi nav đã render xong
+        // Cập nhật số lượng sau khi nav render xong
         requestAnimationFrame(() => {
             if (typeof updateCartCount === "function") updateCartCount();
         });
     }
 }
-// Hàm xử lý đăng xuất
+
 document.addEventListener('DOMContentLoaded', checkLoginStatus);
 
-// Hàm xử lý đăng xuất
+// ===== Đăng Xuất =====
 function handleLogout() {
     localStorage.removeItem('currentUser');
     alert("Bạn đã đăng xuất!");
     window.location.reload();
 }
 
-// Hiện form quên mật khẩu
-function showForgotPassword(){
-
+// ===== Quên mật khẩu =====
+function showForgotPassword() {
     document.getElementById('login-form').style.display = "none";
-
     document.getElementById('register-form').style.display = "none";
-
     document.getElementById('forgot-form').style.display = "block";
 }
 
-
-// Quay lại đăng nhập
-function backToLogin(){
-
+function backToLogin() {
     document.getElementById('forgot-form').style.display = "none";
-
     document.getElementById('login-form').style.display = "block";
 }
 
+// FIX: Đổi mật khẩu cũng hash trước khi lưu
+async function resetPassword() {
+    const username = document.getElementById('forgot-user').value.trim();
+    const newPassword = document.getElementById('new-pass').value.trim();
 
-// Đổi mật khẩu
-function resetPassword(){
-
-    const username = document
-        .getElementById('forgot-user')
-        .value
-        .trim();
-
-    const newPassword = document
-        .getElementById('new-pass')
-        .value
-        .trim();
-
-    if(!username || !newPassword){
-
+    if (!username || !newPassword) {
         alert("Vui lòng nhập đầy đủ thông tin!");
-
         return;
     }
 
     let users = JSON.parse(localStorage.getItem('users')) || [];
-
-    // Tìm user
     let foundUser = users.find(u => u.username === username);
 
-    if(foundUser){
-
-        foundUser.password = newPassword;
-
+    if (foundUser) {
+        foundUser.password = await hashPassword(newPassword);
         localStorage.setItem('users', JSON.stringify(users));
-
         alert("Đổi mật khẩu thành công!");
-
         backToLogin();
-
-    }else{
-
+    } else {
         alert("Tên đăng nhập không tồn tại!");
     }
 }

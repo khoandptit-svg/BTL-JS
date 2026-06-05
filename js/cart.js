@@ -1,20 +1,15 @@
-// checkout.js - Xử lý trang thanh toán
-function getCartKey() {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
-    return user ? `cart_${user.username}` : null;
-}
+// cart.js - Xử lý trang giỏ hàng
 
-// Cập nhật số lượng sản phẩm trong giỏ hàng ở Header
+// Render danh sách sản phẩm trong giỏ hàng
 function renderCart() {
-    // Lấy phần tử tbody của bảng giỏ hàng
     const cartTableBody = document.getElementById('cart-table-body');
     if (!cartTableBody) return;
-    // Lấy giỏ hàng của user hiện tại
+
     const key = getCartKey();
     let cart = key ? JSON.parse(localStorage.getItem(key)) || [] : [];
     cartTableBody.innerHTML = "";
     let total = 0;
-    // Nếu giỏ hàng trống, hiển thị thông báo và link về trang chủ
+
     if (cart.length === 0) {
         cartTableBody.innerHTML = `
             <tr>
@@ -28,7 +23,7 @@ function renderCart() {
         if (totalPriceEl) totalPriceEl.innerText = "0 đ";
         return;
     }
-    // Hiển thị từng sản phẩm trong giỏ hàng
+
     cart.forEach((item, index) => {
         const productInfo = products.find(p => p.id === item.id);
         if (productInfo) {
@@ -49,12 +44,12 @@ function renderCart() {
                 </tr>`;
         }
     });
-    // Hiển thị tổng tiền
+
     const totalPriceEl = document.getElementById('total-price');
     if (totalPriceEl) totalPriceEl.innerText = total.toLocaleString('vi-VN') + " đ";
 }
 
-// Hàm xử lý khi nhấn nút "Xác nhận đơn hàng"
+// Thay đổi số lượng sản phẩm
 function changeQuantity(index, delta) {
     const key = getCartKey();
     let cart = JSON.parse(localStorage.getItem(key)) || [];
@@ -64,7 +59,7 @@ function changeQuantity(index, delta) {
     updateCartCount();
 }
 
-// Hàm xóa sản phẩm khỏi giỏ hàng
+// Xóa sản phẩm khỏi giỏ hàng
 function removeFromCart(index) {
     const key = getCartKey();
     let cart = JSON.parse(localStorage.getItem(key)) || [];
@@ -74,18 +69,8 @@ function removeFromCart(index) {
     updateCartCount();
 }
 
-// Hàm xử lý khi nhấn nút "Xác nhận đơn hàng"
-function checkout() {
-    alert("Cảm ơn bạn đã đặt hàng! Chúng tôi sẽ liên hệ sớm.");
-    const key = getCartKey();
-    if (key) localStorage.removeItem(key);
-    location.reload();
-}
-
-// Dùng DOMContentLoaded thay vì window.onload để không xung đột main.js
+// FIX: Chỉ render giỏ hàng, không gọi createModalHTML/renderProducts (không cần ở trang cart)
 document.addEventListener('DOMContentLoaded', function() {
-    createModalHTML();
-    renderProducts();
     renderCart();
     updateCartCount();
 });
