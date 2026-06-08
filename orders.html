@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn Hàng Của Tôi - KTA Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/orders.css">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html"><img src="images/logoKTA.png" alt="Logo KTA"></a>
+        </div>
+        <div class="header-center">
+            <h1 class="brand-name">KTA SHOP</h1>
+        </div>
+        <div class="header-right">
+            <nav class="checkout-nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="orders.html" style="background:rgba(255,255,255,0.25);">Đơn hàng</a>
+                <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
+                <a href="login.html">Đăng nhập</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main class="orders-page">
+    <h2 class="page-title">Đơn hàng của tôi</h2>
+    <div id="orders-container">
+        <!-- JS render vào đây -->
+    </div>
+</main>
+
+<!-- ===== MODAL HỦY ĐƠN ===== -->
+<div class="modal-overlay" id="cancel-modal-overlay">
+    <div class="cancel-modal">
+        <h3>Hủy đơn hàng <span id="modal-order-code" style="color: var(--red)"></span></h3>
+        <p class="modal-subtitle">
+            Chọn lý do hủy đơn để chúng tôi cải thiện chất lượng dịch vụ.<br>
+            Lưu ý: Chỉ có thể hủy đơn khi đơn chưa được giao.
+        </p>
+        <div class="reason-list">
+            <div class="reason-item" onclick="selectReason(this)">
+                <input type="radio" name="cancel-reason" id="r1" value="Tôi đặt nhầm sản phẩm">
+                <label for="r1">Tôi đặt nhầm sản phẩm</label>
+            </div>
+            <div class="reason-item" onclick="selectReason(this)">
+                <input type="radio" name="cancel-reason" id="r2" value="Tìm thấy giá rẻ hơn ở nơi khác">
+                <label for="r2">Tìm thấy giá rẻ hơn ở nơi khác</label>
+            </div>
+            <div class="reason-item" onclick="selectReason(this)">
+                <input type="radio" name="cancel-reason" id="r3" value="Không còn nhu cầu mua nữa">
+                <label for="r3">Không còn nhu cầu mua nữa</label>
+            </div>
+            <div class="reason-item" onclick="selectReason(this)">
+                <input type="radio" name="cancel-reason" id="r4" value="Thời gian giao hàng quá lâu">
+                <label for="r4">Thời gian giao hàng quá lâu</label>
+            </div>
+            <div class="reason-item" onclick="selectReason(this)">
+                <input type="radio" name="cancel-reason" id="r5" value="Muốn thay đổi địa chỉ giao hàng">
+                <label for="r5">Muốn thay đổi địa chỉ giao hàng</label>
+            </div>
+            <div class="reason-item" onclick="selectReason(this)">
+                <input type="radio" name="cancel-reason" id="r6" value="Lý do khác">
+                <label for="r6">Lý do khác</label>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-keep" onclick="closeCancelModal()">Giữ đơn hàng</button>
+            <button class="btn-confirm-cancel" onclick="confirmCancel()">✕ Xác nhận hủy</button>
+        </div>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>KTA SHOP</h3>
+            <p>Chuyên cung cấp đồ gia dụng thông minh, chính hãng Magic Eco. Mang lại sự tiện nghi cho căn bếp nhà bạn.</p>
+            <div class="social-links"><a href="#">🌐 Website</a></div>
+        </div>
+        <div class="footer-col">
+            <h4>Thông Tin Liên Hệ</h4>
+            <p>📍 Địa chỉ: Hà Nội, Việt Nam</p>
+            <p>📞 Hotline: 098.XXX.XXXX</p>
+            <p>✉️ Email: support@ktashop.vn</p>
+            <p>⏰ Giờ làm việc: 8:00 - 21:00</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 KTA Shop. Tất cả các quyền được bảo lưu.</p>
+    </div>
+</footer>
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/orders.js"></script>
+
+</body>
+</html>
