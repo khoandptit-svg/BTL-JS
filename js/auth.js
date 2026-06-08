@@ -80,10 +80,12 @@ function checkLoginStatus() {
         if (currentUser) {
             navContainer.innerHTML = `
                 <span style="color: #fff; font-weight: bold; margin-right: 10px;">Chào, ${currentUser.username}</span>
-                <a href="#" onclick="handleLogout()" style="margin-right: 15px; color: #ffeb3b;">Đăng xuất</a>
+                <a href="orders.html" id="orders-link">Đơn hàng</a>
+                <a href="#" onclick="handleLogout()" style="color: #ffeb3b;">Đăng xuất</a>
                 <a href="cart.html" id="cart-link">Giỏ hàng (<span id="cart-count">0</span>)</a>
             `;
         } else {
+            // Chưa đăng nhập: đảm bảo cart-count có span
             const cartLink = navContainer.querySelector('#cart-link');
             if (cartLink && !cartLink.querySelector('#cart-count')) {
                 cartLink.innerHTML = `Giỏ hàng (<span id="cart-count">0</span>)`;
