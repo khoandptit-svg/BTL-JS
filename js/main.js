@@ -1,23 +1,51 @@
+<<<<<<< Updated upstream
 // main.js - Xử lý giao diện chính: render sản phẩm, modal, tìm kiếm, lọc, giỏ hàng
 
 // Hàm hiển thị sản phẩm
 function renderProducts(data = products) {
+=======
+//hàm hiển thị sản phẩm
+async function renderProducts() {
+
+    const response = await fetch("http://localhost:3000/products");
+
+    const products = await response.json();
+
+>>>>>>> Stashed changes
     const productList = document.getElementById('product-list');
+
     if (!productList) return;
+<<<<<<< Updated upstream
+    productList.innerHTML = "";
+=======
+
     productList.innerHTML = "";
 
-    data.forEach(product => {
+    products.forEach(product => {
+>>>>>>> Stashed changes
+
         productList.innerHTML += `
+
             <div class="product-card">
-                ${product.oldPrice ? `<span class="discount-badge">-${Math.round((1 - product.price/product.oldPrice)*100)}%</span>` : ''}
-                <img src="${product.image}" alt="${product.name}" onclick="openProductModal(${product.id})" style="cursor:pointer;">
+
+                <img src="${product.image}" alt="${product.name}">
+
                 <h3>${product.name}</h3>
+
                 <p class="price">
                     ${product.price.toLocaleString('vi-VN')} đ
-                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString('vi-VN')} đ</span>` : ''}
+
+                    <span class="old-price">
+                        ${product.oldPrice.toLocaleString('vi-VN')} đ
+                    </span>
                 </p>
-                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+
+                <button onclick="addToCart(${product.id})">
+                    Thêm vào giỏ
+                </button>
+
             </div>
+
         `;
     });
 }
@@ -167,3 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateCartCount();
 });
+
+window.onload = function () {
+
+    renderProducts();
+
+    updateCartCount();
+
+};
