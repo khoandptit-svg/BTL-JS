@@ -1,29 +1,39 @@
-<<<<<<< Updated upstream
 // main.js - Xử lý giao diện chính: render sản phẩm, modal, tìm kiếm, lọc, giỏ hàng
 
 // Hàm hiển thị sản phẩm
 function renderProducts(data = products) {
-=======
-//hàm hiển thị sản phẩm
-async function renderProducts() {
-
-    const response = await fetch("http://localhost:3000/products");
-
-    const products = await response.json();
-
->>>>>>> Stashed changes
     const productList = document.getElementById('product-list');
 
     if (!productList) return;
-<<<<<<< Updated upstream
-    productList.innerHTML = "";
-=======
-
     productList.innerHTML = "";
 
-    products.forEach(product => {
->>>>>>> Stashed changes
+    data.forEach(product => {
 
+        productList.innerHTML += `
+
+            <div class="product-card">
+
+                <img src="${product.image}" alt="${product.name}">
+
+                <h3>${product.name}</h3>
+
+                <p class="price">
+                    ${product.price.toLocaleString('vi-VN')} đ
+
+                    <span class="old-price">
+                        ${product.oldPrice.toLocaleString('vi-VN')} đ
+                    </span>
+                </p>
+
+                <button onclick="addToCart(${product.id})">
+                    Thêm vào giỏ
+                </button>
+
+            </div>
+
+        `;
+    });
+}
         productList.innerHTML += `
 
             <div class="product-card">
@@ -195,11 +205,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateCartCount();
 });
-
-window.onload = function () {
-
-    renderProducts();
-
-    updateCartCount();
-
-};
