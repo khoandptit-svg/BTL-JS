@@ -3,10 +3,10 @@
 // ===== Hash mật khẩu bằng SHA-256 (Web Crypto API) =====
 async function hashPassword(password) {
     const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const data = encoder.encode(password);// Chuyển chuỗi sang Uint8Array
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);// Tạo hash SHA-256
+    const hashArray = Array.from(new Uint8Array(hashBuffer));// Chuyển ArrayBuffer sang mảng byte
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // Chuyển sang chuỗi hex
 }
 
 // ===== Chuyển đổi giữa form Đăng nhập / Đăng ký =====
