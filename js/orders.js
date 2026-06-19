@@ -21,7 +21,7 @@ function renderOrders() {
             </div>`;
         return;
     }
-
+    // Lấy đơn hàng từ localStorage
     const orders = JSON.parse(localStorage.getItem(key)) || [];
 
     if (orders.length === 0) {
@@ -44,12 +44,14 @@ function renderOrders() {
 
 // ===== Build HTML một thẻ đơn hàng =====
 function buildOrderCard(order, realIdx) {
+    // Map trạng thái đơn hàng sang nhãn và màu sắc
     const statusMap = {
         'processing': { label: 'Đang xử lý',    cls: 'status-processing', icon: '⏳' },
         'shipping':   { label: 'Đang giao hàng', cls: 'status-shipping',   icon: '🚚' },
         'delivered':  { label: 'Đã giao hàng',   cls: 'status-delivered',  icon: '✅' },
         'cancelled':  { label: 'Đã hủy',          cls: 'status-cancelled',  icon: '✕'  },
     };
+    // Lấy thông tin trạng thái, mặc định là 'Đang xử lý' nếu không có
     const st = statusMap[order.status] || statusMap['processing'];
 
     // Render từng sản phẩm
@@ -75,7 +77,7 @@ function buildOrderCard(order, realIdx) {
     } else if (order.status === 'cancelled') {
         footerAction = `<span class="cancelled-tag">✕ Đã hủy${order.cancelReason ? ' — ' + order.cancelReason : ''}</span>`;
     }
-
+    // Tổng tiền nếu đơn đang bị hủy sẽ có gạch ngang để phân biệt
     const totalClass = order.status === 'cancelled'
         ? 'order-total-value strikethrough'
         : 'order-total-value';
@@ -106,7 +108,7 @@ function buildOrderCard(order, realIdx) {
                 <span class="meta-value">${order.note}</span>
             </div>
         </div>` : '';
-
+    // Trả về HTML của thẻ đơn hàng
     return `
     <div class="order-card" id="order-card-${realIdx}">
         <div class="order-card-header">
@@ -169,7 +171,7 @@ function buildOrderCard(order, realIdx) {
 
 // ===== Modal hủy đơn =====
 let cancelTargetIdx = null;
-
+//  Mở modal hủy đơn, truyền vào index thực của đơn hàng trong mảng orders và mã đơn hàng để hiển thị
 function openCancelModal(idx, code) {
     cancelTargetIdx = idx;
     document.getElementById('modal-order-code').textContent = '#' + code;
@@ -177,28 +179,29 @@ function openCancelModal(idx, code) {
     document.querySelectorAll('input[name="cancel-reason"]').forEach(r => r.checked = false);
     document.getElementById('cancel-modal-overlay').classList.add('active');
 }
-
+// Đóng modal hủy đơn
 function closeCancelModal() {
     document.getElementById('cancel-modal-overlay').classList.remove('active');
     cancelTargetIdx = null;
 }
-
+// Chọn lý do hủy đơn
 function selectReason(el) {
     document.querySelectorAll('.reason-item').forEach(r => r.classList.remove('selected'));
     el.classList.add('selected');
     el.querySelector('input').checked = true;
 }
-
+//  Xác nhận hủy đơn hàng, cập nhật trạng thái và lý do hủy vào localStorage
 function confirmCancel() {
+    // Kiểm tra đã chọn lý do hủy chưa
     const selected = document.querySelector('input[name="cancel-reason"]:checked');
     if (!selected) {
         alert('Vui lòng chọn lý do hủy đơn!');
         return;
     }
-
+    // Cập nhật trạng thái đơn hàng trong localStorage
     const key = getOrdersKey();
     if (!key || cancelTargetIdx === null) return;
-
+    // Lấy đơn hàng từ localStorage, cập nhật trạng thái và lý do hủy, sau đó lưu lại
     let orders = JSON.parse(localStorage.getItem(key)) || [];
     if (orders[cancelTargetIdx]) {
         orders[cancelTargetIdx].status = 'cancelled';
@@ -214,7 +217,7 @@ function confirmCancel() {
 document.getElementById('cancel-modal-overlay').addEventListener('click', function(e) {
     if (e.target === this) closeCancelModal();
 });
-
+// Đóng modal khi nhấn phím Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeCancelModal();
 });

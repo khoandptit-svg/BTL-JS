@@ -39,7 +39,7 @@ async function handleRegister() {
         return;
     }
 
-    // FIX: Lưu mật khẩu đã hash thay vì plaintext
+    // Lưu mật khẩu đã hash thay vì plaintext
     const hashedPass = await hashPassword(pass);
     users.push({ username: user, password: hashedPass });
     localStorage.setItem('users', JSON.stringify(users));
@@ -57,7 +57,7 @@ async function handleLogin() {
         return;
     }
 
-    // FIX: So sánh với mật khẩu đã hash
+    //: So sánh với mật khẩu đã hash trong localStorage
     const hashedPass = await hashPassword(pass);
     let users = JSON.parse(localStorage.getItem('users')) || [];
     const foundUser = users.find(u => u.username === user && u.password === hashedPass);
@@ -72,6 +72,7 @@ async function handleLogin() {
 }
 
 // ===== Kiểm tra trạng thái đăng nhập & cập nhật Header =====
+// JSON.parse để lấy username thay vì chỉ lấy chuỗi (JSON.parse sẽ trả về object { username: "..." })
 function checkLoginStatus() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const navContainer = document.querySelector('.checkout-nav');
@@ -102,6 +103,7 @@ function checkLoginStatus() {
 document.addEventListener('DOMContentLoaded', checkLoginStatus);
 
 // ===== Đăng Xuất =====
+// Xoá currentUser khi đăng xuất và reload trang để cập nhật header
 function handleLogout() {
     localStorage.removeItem('currentUser');
     alert("Bạn đã đăng xuất!");
@@ -109,18 +111,20 @@ function handleLogout() {
 }
 
 // ===== Quên mật khẩu =====
+// Hiển thị form quên mật khẩu
 function showForgotPassword() {
     document.getElementById('login-form').style.display = "none";
     document.getElementById('register-form').style.display = "none";
     document.getElementById('forgot-form').style.display = "block";
 }
 
+// Quay lại form đăng nhập
 function backToLogin() {
     document.getElementById('forgot-form').style.display = "none";
     document.getElementById('login-form').style.display = "block";
 }
 
-// FIX: Đổi mật khẩu cũng hash trước khi lưu
+//Đổi mật khẩu cũng hash trước khi lưu
 async function resetPassword() {
     const username = document.getElementById('forgot-user').value.trim();
     const newPassword = document.getElementById('new-pass').value.trim();
@@ -129,10 +133,10 @@ async function resetPassword() {
         alert("Vui lòng nhập đầy đủ thông tin!");
         return;
     }
-
+    // Tìm người dùng và cập nhật mật khẩu đã hash
     let users = JSON.parse(localStorage.getItem('users')) || [];
     let foundUser = users.find(u => u.username === username);
-
+    // Nếu tìm thấy, cập nhật mật khẩu đã hash và lưu lại vào localStorage
     if (foundUser) {
         foundUser.password = await hashPassword(newPassword);
         localStorage.setItem('users', JSON.stringify(users));

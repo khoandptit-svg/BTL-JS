@@ -3,6 +3,7 @@
 // Hàm hiển thị sản phẩm
 function renderProducts(data = products) {
     const productList = document.getElementById('product-list');
+    // Nếu không có container sản phẩm, không làm gì
     if (!productList) return;
     productList.innerHTML = "";
 
@@ -24,15 +25,16 @@ function renderProducts(data = products) {
 
 // ===== MODAL =====
 function openProductModal(id) {
+    // Tìm sản phẩm theo id
     const product = products.find(p => p.id === id);
     if (!product) return;
-
+    // Điền thông tin sản phẩm vào modal
     document.getElementById('modal-img').src = product.image;
     document.getElementById('modal-img').alt = product.name;
     document.getElementById('modal-name').textContent = product.name;
     document.getElementById('modal-desc').textContent = product.description;
     document.getElementById('modal-price').textContent = product.price.toLocaleString('vi-VN') + ' đ';
-
+    // Hiển thị giá cũ nếu có, ẩn nếu không
     const oldPriceEl = document.getElementById('modal-old-price');
     if (product.oldPrice) {
         oldPriceEl.textContent = product.oldPrice.toLocaleString('vi-VN') + ' đ';
@@ -40,23 +42,25 @@ function openProductModal(id) {
     } else {
         oldPriceEl.style.display = 'none';
     }
-
+    // Cập nhật sự kiện cho nút thêm vào giỏ hàng trong modal
     document.getElementById('modal-add-btn').onclick = function() {
         addToCart(product.id);
         closeProductModal();
     };
-
+    // Hiển thị modal
     const overlay = document.getElementById('product-modal-overlay');
     overlay.style.display = 'flex';
     setTimeout(() => overlay.classList.add('show'), 10);
 }
 
+// Đóng modal khi click ra ngoài hoặc nhấn nút đóng
 function closeProductModal() {
     const overlay = document.getElementById('product-modal-overlay');
     overlay.classList.remove('show');
     setTimeout(() => { overlay.style.display = 'none'; }, 280);
 }
 
+// Tạo HTML cho modal (chỉ tạo 1 lần)
 function createModalHTML() {
     if (document.getElementById('product-modal-overlay')) return;
     document.body.insertAdjacentHTML('beforeend', `
@@ -90,7 +94,7 @@ function addToCart(id) {
         window.location.href = "login.html";
         return;
     }
-
+    // FIX: Sử dụng key giỏ hàng riêng cho từng người dùng
     const key = getCartKey();
     let cart = JSON.parse(localStorage.getItem(key)) || [];
     let itemExisted = cart.find(item => item.id === id);
@@ -100,7 +104,7 @@ function addToCart(id) {
     } else {
         cart.push({ id: id, quantity: 1 });
     }
-
+    // Lưu giỏ hàng vào localStorage với key riêng cho người dùng
     localStorage.setItem(key, JSON.stringify(cart));
     updateCartCount();
 
@@ -135,6 +139,7 @@ function filterProducts(event, category) {
 }
 
 // ===== Tìm kiếm =====
+//  Hàm tìm kiếm chỉ chuyển hướng, không thực hiện tìm kiếm tại đây
 function handleSearch() {
     const searchInput = document.getElementById('search-input');
     if (!searchInput) return;
@@ -143,7 +148,7 @@ function handleSearch() {
         window.location.href = `search.html?query=${encodeURIComponent(keyword)}`;
     }
 }
-
+// Tìm kiếm và hiển thị kết quả trên trang search.html
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeProductModal();
 });

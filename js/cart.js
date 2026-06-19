@@ -4,12 +4,12 @@
 function renderCart() {
     const cartTableBody = document.getElementById('cart-table-body');
     if (!cartTableBody) return;
-
+    // Lấy giỏ hàng từ localStorage
     const key = getCartKey();
     let cart = key ? JSON.parse(localStorage.getItem(key)) || [] : [];
     cartTableBody.innerHTML = "";
     let total = 0;
-
+    // Nếu giỏ hàng trống, hiển thị thông báo
     if (cart.length === 0) {
         cartTableBody.innerHTML = `
             <tr>
@@ -19,12 +19,14 @@ function renderCart() {
                     <a href="index.html" style="color:#38a149; font-weight:bold;">← Tiếp tục mua sắm</a>
                 </td>
             </tr>`;
+            // Đặt tổng tiền về 0 khi giỏ hàng trống
         const totalPriceEl = document.getElementById('total-price');
         if (totalPriceEl) totalPriceEl.innerText = "0 đ";
         return;
     }
-
+    // Nếu có sản phẩm, hiển thị danh sách
     cart.forEach((item, index) => {
+        // Tìm thông tin sản phẩm từ mảng products
         const productInfo = products.find(p => p.id === item.id);
         if (productInfo) {
             const subtotal = productInfo.price * item.quantity;
@@ -44,7 +46,7 @@ function renderCart() {
                 </tr>`;
         }
     });
-
+    // Cập nhật tổng tiền
     const totalPriceEl = document.getElementById('total-price');
     if (totalPriceEl) totalPriceEl.innerText = total.toLocaleString('vi-VN') + " đ";
 }

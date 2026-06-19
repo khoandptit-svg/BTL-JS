@@ -1,6 +1,7 @@
 // search.js - Xử lý tìm kiếm sản phẩm
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Lấy từ khóa tìm kiếm từ URL
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('query');
     const titleEl = document.getElementById('search-title');
@@ -21,30 +22,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
+    // Nếu không có từ khóa, hiển thị thông báo
     if (!searchQuery || searchQuery.trim() === "") {
         if (titleEl) titleEl.innerText = "Bạn chưa nhập từ khóa tìm kiếm.";
         return;
     }
-
+    // Hiển thị tiêu đề tìm kiếm và kết quả
     if (titleEl) titleEl.innerText = `Kết quả tìm kiếm cho: "${searchQuery}"`;
     performSearch(searchQuery.toLowerCase().trim(), resultsContainer);
 
     updateCartCount();
 });
 
+// Hiển thị kết quả tìm kiếm
 function performSearch(keyword, container) {
     if (!container) return;
     if (typeof products === 'undefined') {
         container.innerHTML = "<p>Lỗi: Không thể kết nối dữ liệu sản phẩm.</p>";
         return;
     }
+    // Lọc sản phẩm theo từ khóa
     const filteredResults = products.filter(product =>
         product.name.toLowerCase().includes(keyword)
     );
     renderItems(filteredResults, container);
 }
 
+// Render danh sách sản phẩm ra HTML
 function renderItems(list, container) {
     container.innerHTML = "";
     if (list.length === 0) {

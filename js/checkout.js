@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = "login.html";
         return;
     }
-
+    // Lấy giỏ hàng từ localStorage
     const key = getCartKey();
     let cart = key ? JSON.parse(localStorage.getItem(key)) || [] : [];
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = "index.html";
         return;
     }
-
+    // Hiển thị thông tin đơn hàng trên trang checkout
     const reviewList = document.getElementById('review-list');
     const totalEl = document.getElementById('checkout-total');
     if (!reviewList || !totalEl) return;
@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
     reviewList.innerHTML = "";
 
     cart.forEach(item => {
+        // Tìm thông tin sản phẩm từ mảng products
         const p = products.find(product => product.id === item.id);
         if (p) {
+            // Tính subtotal và cộng dồn vào tổng
             const subtotal = p.price * item.quantity;
             total += subtotal;
             reviewList.innerHTML += `
@@ -91,7 +93,7 @@ function confirmOrder() {
     const phone   = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
     const note    = document.getElementById('note') ? document.getElementById('note').value.trim() : '';
-
+    // Kiểm tra thông tin giao hàng
     if (!name || !phone || !address) {
         alert("Vui lòng điền đầy đủ thông tin giao hàng!");
         return;
@@ -104,6 +106,7 @@ function confirmOrder() {
 
     // Tính tổng & build danh sách sản phẩm
     let total = 0;
+    // Danh sách sản phẩm trong đơn hàng
     const orderItems = [];
     cart.forEach(item => {
         const p = products.find(pr => pr.id === item.id);
